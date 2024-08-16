@@ -5,14 +5,14 @@
   - Project Files
     - [Example HIP Files](examples)
   - Nodal Operators
-    - Copernicus Composite Operators
-    - Solaris Lighting Operators
     - Task Operators
       - [Panotools Data nodes](panotools)
       - [Volumetric Video Workflows](https://docs.google.com/document/d/17xXudeghGhvfofffoqLhYmcvgnS-_eP0A1KOwWJPjxg/edit?usp=sharing)
-      - [Render Fusion Comps in Houdini TOPs](https://docs.google.com/document/d/1l9L-LhCxTobZmRlinu3oKUM61EuqtZJmcf_Tv1VG-8Q/edit?usp=sharing)
-  - **Houdini Engine"**
-    - [Fusion Integration Plugin (WIP)](https://github.com/Kartaverse/HoudiniEngine)
+      - [Render Fusion Comps](https://docs.google.com/document/d/1l9L-LhCxTobZmRlinu3oKUM61EuqtZJmcf_Tv1VG-8Q/edit?usp=sharing)
+    - Copernicus Composite Operators
+    - Solaris Lighting Operators
+  - **Houdini Engine**
+    - [Fusion Integration Plugin (WIP)](https://docs.google.com/document/d/1OeCB50wf7IWj1YgOcdjvOmVEvhQEbuRZ2nxY2Bvqtqk/edit#heading=h.vjxsmunesu05)
 - **Contact**
   - [Email](mailto:andrew@andrewhazelden.com)
   - [GitHub](https://github.com/AndrewHazelden)
