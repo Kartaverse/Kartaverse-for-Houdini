@@ -11,6 +11,8 @@
       - [Render Fusion Comps](https://docs.google.com/document/d/1l9L-LhCxTobZmRlinu3oKUM61EuqtZJmcf_Tv1VG-8Q/edit?usp=sharing)
     - Copernicus Composite Operators
     - Solaris Lighting Operators
+  - **HQueue**
+    - [KartaLink HQueue Render](hqueue.md)
   - **Houdini Engine**
     - [Fusion Integration Plugin (WIP)](https://docs.google.com/document/d/1OeCB50wf7IWj1YgOcdjvOmVEvhQEbuRZ2nxY2Bvqtqk/edit#heading=h.vjxsmunesu05)
 - **Contact**
