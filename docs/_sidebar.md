@@ -1,0 +1,18 @@
+<!-- docs/_sidebar.md -->
+- [Home](/)
+- **Kartaverse for Houdini:**
+  - Project Files:
+    - [Example HIP Files](examples)
+  - TOPS (Task Operators):
+    - [Panotools Data nodes](panotools)
+    - [Volumetric Video Workflows](https://docs.google.com/document/d/17xXudeghGhvfofffoqLhYmcvgnS-_eP0A1KOwWJPjxg/edit?usp=sharing)
+    - [Render Fusion Comps in Houdini TOPs](https://docs.google.com/document/d/1l9L-LhCxTobZmRlinu3oKUM61EuqtZJmcf_Tv1VG-8Q/edit?usp=sharing)
+  - [Shelf Tools](shelf)
+- **Contact**
+  - [Email](mailto:andrew@andrewhazelden.com)
+  - [GitHub](https://github.com/AndrewHazelden)
+  - [LinkedIn](https://www.linkedin.com/in/andrewhazelden/)
+- **Links**
+  - [Medium Blog](https://medium.com/@andrewhazelden)
+  - [Facebook Group](https://www.facebook.com/groups/kartavr)
+  - [Google Group](https://groups.google.com/g/kartaverse/)
