@@ -11,10 +11,17 @@ The letters "PT" stand for Pano Tools. The Houdini TOPs example .hip files make 
 A collection of example .hip files are provided help you get started with PTGui .pts workflows in Houdini:
 
 ### /HoudiniProjects/TOPS_Panotools/
+- TOPs_FFmpeg_Movies_to_Frameset_Images_V001.hip
 - TOPS_ptBatchStitcher_Single_Frame_V001.hip
 - TOPs_PTGui_PTS_to_Frameset_Folders_V001.hip
 
 ## Screenshots
+
+FFmpeg can be used to transcode video files into PTGui "BatchBuilder" folder hierarchy based image sequences.
+
+![PTS to Folders](Images/panotools-movies-to-frameset-images.png)
+
+* * *
 
 Houdini TOPs can be used to create PTGui "BatchBuilder" folder hierarchies. This is a key step if you want to use image sequence based stitching.
 

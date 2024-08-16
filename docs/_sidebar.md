@@ -1,13 +1,18 @@
 <!-- docs/_sidebar.md -->
 - [Home](/)
 - **Kartaverse for Houdini:**
-  - Project Files:
+  - [Kartaverse Shelf Tools](shelf)
+  - Project Files
     - [Example HIP Files](examples)
-  - TOPS (Task Operators):
-    - [Panotools Data nodes](panotools)
-    - [Volumetric Video Workflows](https://docs.google.com/document/d/17xXudeghGhvfofffoqLhYmcvgnS-_eP0A1KOwWJPjxg/edit?usp=sharing)
-    - [Render Fusion Comps in Houdini TOPs](https://docs.google.com/document/d/1l9L-LhCxTobZmRlinu3oKUM61EuqtZJmcf_Tv1VG-8Q/edit?usp=sharing)
-  - [Shelf Tools](shelf)
+  - Nodal Operators
+    - Copernicus Composite Operators
+    - Solaris Lighting Operators
+    - Task Operators
+      - [Panotools Data nodes](panotools)
+      - [Volumetric Video Workflows](https://docs.google.com/document/d/17xXudeghGhvfofffoqLhYmcvgnS-_eP0A1KOwWJPjxg/edit?usp=sharing)
+      - [Render Fusion Comps in Houdini TOPs](https://docs.google.com/document/d/1l9L-LhCxTobZmRlinu3oKUM61EuqtZJmcf_Tv1VG-8Q/edit?usp=sharing)
+  - **Houdini Engine"**
+    - [Fusion Integration Plugin (WIP)](https://github.com/Kartaverse/HoudiniEngine)
 - **Contact**
   - [Email](mailto:andrew@andrewhazelden.com)
   - [GitHub](https://github.com/AndrewHazelden)

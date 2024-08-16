@@ -2,6 +2,9 @@
 
 Kartaverse for Houdini ships with a collection of example .hip files you can use to learn data node workflows. The sample projects cover XR industry focused concepts that will help you prepare content for use in virtual production, XR, VR, and fulldome projects.
 
+## /HoudiniProjects/TOPS_FusionStudio/
+- TOPS_FusionStudio_Fusion_Render_Node_V001.hip
+
 ## /HoudiniProjects/TOPS_Panotools/
 - TOPS_ptBatchStitcher_Single_Frame_V001.hip
 - TOPs_PTGui_PTS_to_Frameset_Folders_V001.hip
