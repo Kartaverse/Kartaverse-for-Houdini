@@ -12,8 +12,8 @@ A collection of example .hip files are provided help you get started with PTGui 
 
 ### /HoudiniProjects/TOPS_Panotools/
 - TOPs_FFmpeg_Movies_to_Frameset_Images_V001.hip
-- TOPS_ptBatchStitcher_Single_Frame_V001.hip
-- TOPs_PTGui_PTS_to_Frameset_Folders_V001.hip
+- TOPs_PTS_to_Frameset_Folders_V001.hip
+- TOPS_PTS_Batch_Stitcher_Single_Frame_V001.hip
 
 ## Screenshots
 
