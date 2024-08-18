@@ -14,7 +14,7 @@
   - **HQueue**
     - [KartaLink HQueue Render](hqueue.md)
   - **Houdini Engine**
-    - [Fusion Integration Plugin (WIP)](https://docs.google.com/document/d/1OeCB50wf7IWj1YgOcdjvOmVEvhQEbuRZ2nxY2Bvqtqk/edit#heading=h.vjxsmunesu05)
+    - [Fusion Integration Plugin (WIP)](https://www.facebook.com/share/p/fN47vjobmNDd9Shh/)
 - **Contact**
   - [Email](mailto:andrew@andrewhazelden.com)
   - [GitHub](https://github.com/AndrewHazelden)
