@@ -28,5 +28,5 @@ As always, more learning content is on the way! If you have something specific i
 
 The Reality Capture workflow expects the "Align Views" task to happen first, followed by the "XYZ Output", and then finally the "OBJ Output". 
 
-If you want to drop the "XYZ Output stage", simply edit the "OBJ Output" TOPS network and change the "rc_command node" to point to a different Realty Capture checkpoint project file on this part of the expression:``` -load `@rcProjectXYZFile` ```. You would change that entry to specify ``` -load  `@rcProjectAlignFile` ``` instead.
+If you want to drop the "XYZ Output stage", simply edit the "OBJ Output" TOPS network and change the "rc_command" node to point to a different Realty Capture checkpoint project file on this part of the expression:``` -load `@rcProjectXYZFile` ```. You would change that entry to specify ``` -load  `@rcProjectAlignFile` ``` instead.
 
