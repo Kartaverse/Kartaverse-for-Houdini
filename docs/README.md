@@ -9,5 +9,7 @@
 
 -------------------------
 
+All trademarks, logos, and brand names are the property of their respective owners.
+
 Kartaverse/KartaVR is (C) Copyright Andrew Hazelden 2014-2024. All rights reserved. KartaVR was formerly known as the "Domemaster Fusion Macros".
 

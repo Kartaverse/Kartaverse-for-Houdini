@@ -1,25 +1,28 @@
 <!-- docs/_sidebar.md -->
 - [Home](/)
 - **Kartaverse for Houdini:**
-  - [Kartaverse Shelf Tools](shelf)
-  - Project Files
-    - [Example HIP Files](examples)
-  - Nodal Operators
-    - Task Operators
-      - [Panotools Data nodes](panotools)
-      - [Volumetric Video Workflows](https://docs.google.com/document/d/17xXudeghGhvfofffoqLhYmcvgnS-_eP0A1KOwWJPjxg/edit?usp=sharing)
-      - [Render Fusion Comps](https://docs.google.com/document/d/1l9L-LhCxTobZmRlinu3oKUM61EuqtZJmcf_Tv1VG-8Q/edit?usp=sharing)
-    - Copernicus Composite Operators
-    - Solaris Lighting Operators
-  - **HQueue**
-    - [KartaLink HQueue Render](hqueue.md)
-  - **Houdini Engine**
-    - [Fusion Integration Plugin (WIP)](https://www.facebook.com/share/p/fN47vjobmNDd9Shh/)
+	- [Kartaverse Shelf Tools](shelf)
+	- [Example HIP Project Files](examples)
+	- Nodal Operators
+		- Task Operators:
+			- [Panotools Data Nodes](panotools)
+			- [Volumetric Video Workflows](https://docs.google.com/document/d/17xXudeghGhvfofffoqLhYmcvgnS-_eP0A1KOwWJPjxg/edit?usp=sharing)
+			- [Render Fusion Comps](https://docs.google.com/document/d/1l9L-LhCxTobZmRlinu3oKUM61EuqtZJmcf_Tv1VG-8Q/edit?usp=sharing)
+		- Copernicus Composite Operators
+		- Solaris Lighting Operators
+	- **HQueue**
+		- [KartaLink HQueue Render](hqueue.md)
+	- **Houdini Engine**
+		- [Fusion Integration Plugin (WIP)](https://www.facebook.com/share/p/fN47vjobmNDd9Shh/)
+
+- **Kartaverse 6 Dev:**
+	- [CesiumLink (WIP)](https://kartaverse.github.io/CesiumLink/)
+	- [RiveLink (WIP)](https://kartaverse.github.io/RiveLink/#/)
 - **Contact**
-  - [Email](mailto:andrew@andrewhazelden.com)
-  - [GitHub](https://github.com/AndrewHazelden)
-  - [LinkedIn](https://www.linkedin.com/in/andrewhazelden/)
+	- [Email](mailto:andrew@andrewhazelden.com)
+	- [GitHub](https://github.com/AndrewHazelden)
+	- [LinkedIn](https://www.linkedin.com/in/andrewhazelden/)
 - **Links**
-  - [Medium Blog](https://medium.com/@andrewhazelden)
-  - [Facebook Group](https://www.facebook.com/groups/kartavr)
-  - [Google Group](https://groups.google.com/g/kartaverse/)
+	- [Medium Blog](https://medium.com/@andrewhazelden)
+	- [Facebook Group](https://www.facebook.com/groups/kartavr)
+	- [Google Group](https://groups.google.com/g/kartaverse/)

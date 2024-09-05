@@ -1,4 +1,4 @@
-# Example HIP Files
+# Example HIP Project Files
 
 Kartaverse for Houdini ships with a [collection of example .hip files](https://github.com/Kartaverse/Kartaverse-for-Houdini/tree/master/HoudiniProjects) you can use to learn data node workflows. The sample projects cover XR industry focused concepts that will help you prepare content for use in virtual production, XR, VR, and fulldome projects.
 
