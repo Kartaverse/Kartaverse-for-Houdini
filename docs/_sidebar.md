@@ -1,6 +1,7 @@
 <!-- docs/_sidebar.md -->
 - [Home](/)
 - **Kartaverse for Houdini:**
+	- [GitHub Project Page](https://kartaverse.github.io/Kartaverse-for-Houdini/)
 	- [Kartaverse Shelf Tools](shelf)
 	- [Example HIP Project Files](examples)
 	- [Panotools Data Nodes](panotools)
@@ -30,6 +31,20 @@
 - **Kartaverse 6 Dev:**
 	- [CesiumLink (WIP)](https://kartaverse.github.io/CesiumLink/)
 	- [RiveLink (WIP)](https://kartaverse.github.io/RiveLink/#/)
+	- [Valkyrie Engine (WIP)](https://kartaverse.github.io/ValkyrieEngine/#/)
+- **Related Projects:**
+	- [Spatial Metadata GUI](https://github.com/Kartaverse/Spatial-Metadata)
+	- [Camera Sensor Database](https://emberlightvfx.github.io/Camera-Sensor-Database/)
+	- [XR LED Panel Database](https://kartaverse.github.io/XR-LED-Panel-Database/)
+	- [Open Cell Animation Data Nodes](https://docs.google.com/document/d/1DXnF47CK7dteF7lidwek5-lwy5qB75nBQMt_2Bp0y0g/edit#heading=h.abzdtec4alet)
+	- [Domemaster3D](https://github.com/zicher3d-org/domemaster-stereo-shader)
+	- [Domemaster Photoshop Actions Pack](https://github.com/AndrewHazelden/Domemaster-Photoshop-Actions-Pack)
+	- [Panoramic Geometry Collection](https://github.com/AndrewHazelden/Panoramic_Geometry_Collection)
+	- [Lightfielder Suite](https://github.com/AndrewHazelden/LightfielderSuite)
+	- [Camera Snap Tools](https://github.com/AndrewHazelden/CameraSnap_Tools)
+	- [Z360 6DOF Stereo VR Tools](https://github.com/AndrewHazelden/Z360-6DOF-Stereo-VR-Tools)
+	- [dome2rect](https://github.com/AndrewHazelden/dome2rect)
+	- [OBQ Shaders](https://github.com/madesjardins/Obq_Shaders/wiki/Obq_KettleUVStereoLens)
 - **Contact**
 	- [Email](mailto:andrew@andrewhazelden.com)
 	- [GitHub](https://github.com/AndrewHazelden)
