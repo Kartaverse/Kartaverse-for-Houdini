@@ -3,18 +3,30 @@
 - **Kartaverse for Houdini:**
 	- [Kartaverse Shelf Tools](shelf)
 	- [Example HIP Project Files](examples)
-	- Nodal Operators
-		- Task Operators:
-			- [Panotools Data Nodes](panotools)
-			- [Volumetric Video Workflows](https://docs.google.com/document/d/17xXudeghGhvfofffoqLhYmcvgnS-_eP0A1KOwWJPjxg/edit?usp=sharing)
-			- [Render Fusion Comps](https://docs.google.com/document/d/1l9L-LhCxTobZmRlinu3oKUM61EuqtZJmcf_Tv1VG-8Q/edit?usp=sharing)
-		- Copernicus Composite Operators
-		- Solaris Lighting Operators
+	- [Panotools Data Nodes](panotools)
+	- Render Fusion Comps in Houdini TOPs
+		- [TOPs Workflow](fusion/tops_workflow)
+		- [Running Fusion Actions](fusion/running_fusion_actions)
+	- Volumetric Video Workflows
+		- [Overview](volumetric_video/overview)
+		- [Project Hierarchy](volumetric_video/project_hierarchy)
+		- [TOPs Basics](volumetric_video/tops_basics)
+		- [Videogrammetry Notes](volumetric_video/notes)
+		- [Preparing XR Stage Deliverables](volumetric_video/preparing_xr_stage_deliverables.md)
+		- [DxO Optics PhotoLab](volumetric_video/dxo_optics_photolab.md)
+		- TOPs Example HIP Projects:
+			- [TOPs FFmpeg Movies to Frameset Images](volumetric_video/tops_ffmpeg_movies_to_frameset_images)
+			- [TOPs XMP Sequence to Frameset XMP](volumetric_video/tops_xmp_sequence_to_frameset_xmp)
+			- [TOPs Frameset Images to Image Sequence](volumetric_video/tops_frameset_images_to_image_sequence.md)
+			- [TOPs Frameset Meshes to OBJ Mesh Sequence](volumetric_video/tops_frameset_meshes_to_obj_mesh_sequence.md)
+			- [TOPs OBJ Mesh Sequence to ZIP Archive](volumetric_video/tops_obj_mesh_sequence_to_zip_archive.md)
+			- [TOPs Reality Capture Align Views](volumetric_video/tops_reality_capture_align_views.md)
+			- [TOPs Reality Capture XYZ Output](volumetric_video/tops_reality_capture_xyz_output.md)
+			- [TOPs Reality Capture OBJ Output](volumetric_video/tops_reality_capture_obj_output.md)
 	- **HQueue**
 		- [KartaLink HQueue Render](hqueue.md)
 	- **Houdini Engine**
-		- [Fusion Integration Plugin (WIP)](https://www.facebook.com/share/p/fN47vjobmNDd9Shh/)
-
+		- Fusion Integration Plugin (WIP)
 - **Kartaverse 6 Dev:**
 	- [CesiumLink (WIP)](https://kartaverse.github.io/CesiumLink/)
 	- [RiveLink (WIP)](https://kartaverse.github.io/RiveLink/#/)
