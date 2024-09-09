@@ -290,7 +290,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
@@ -346,7 +346,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
@@ -402,7 +402,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
@@ -459,7 +459,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
@@ -516,7 +516,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
@@ -573,7 +573,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
@@ -630,7 +630,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
@@ -686,7 +686,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
@@ -743,7 +743,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
@@ -799,7 +799,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
@@ -855,10 +855,11 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
+
 # $HIP/images/####/
 padding = 4
 frame = str(hou.intFrame()).zfill(padding)
@@ -912,7 +913,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
@@ -968,7 +969,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
@@ -1030,7 +1031,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
@@ -1092,7 +1093,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
@@ -1173,7 +1174,7 @@ def kvr_showFolder(mediaFileName):
         import subprocess
         subprocess.Popen(launchCommand)
     elif houPlatform == 'Linux':
-        launchCommand = ['open']
+        launchCommand = ['xdg-open']
         launchCommand.append(mediaFileName)
         import subprocess
         subprocess.Popen(launchCommand)
