@@ -178,9 +178,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -265,9 +265,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -276,13 +276,24 @@ def kvr_getPlatform():
 
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-    os.startfile(mediaFileName)
-
-
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 
 # $HIP
 folderName = str(hipFolder)
@@ -311,9 +322,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -321,12 +332,24 @@ def kvr_getPlatform():
     return houPlatform
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-    os.startfile(mediaFileName)
-
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 
 # $HIP/abc/
 folderName = str(hipFolder) + '/abc/'
@@ -355,9 +378,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -365,11 +388,24 @@ def kvr_getPlatform():
     return houPlatform
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-    os.startfile(mediaFileName)
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 
 
 # $HIP/e57/
@@ -399,9 +435,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -409,11 +445,24 @@ def kvr_getPlatform():
     return houPlatform
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-    os.startfile(mediaFileName)
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 
 
 # $HIP/geo/
@@ -443,9 +492,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -453,11 +502,24 @@ def kvr_getPlatform():
     return houPlatform
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-    os.startfile(mediaFileName)
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 
 
 # $HIP/obj/
@@ -487,9 +549,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -497,11 +559,24 @@ def kvr_getPlatform():
     return houPlatform
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-    os.startfile(mediaFileName)
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 
 
 # $HIP/ipr/
@@ -531,9 +606,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -541,12 +616,24 @@ def kvr_getPlatform():
     return houPlatform
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-    os.startfile(mediaFileName)
-
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 
 # $HIP/metadata/
 folderName = str(hipFolder) + '/metadata/'
@@ -575,9 +662,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -585,11 +672,24 @@ def kvr_getPlatform():
     return houPlatform
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-    os.startfile(mediaFileName)
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 
 
 # $HIP/video/
@@ -619,9 +719,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -629,11 +729,24 @@ def kvr_getPlatform():
     return houPlatform
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-    os.startfile(mediaFileName)
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 
 # $HIP/comp/
 folderName = str(hipFolder) + '/comp/'
@@ -662,9 +775,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -672,11 +785,24 @@ def kvr_getPlatform():
     return houPlatform
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-    os.startfile(mediaFileName)
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 
 # $HIP/images/
 folderName = str(hipFolder) + '/images/'
@@ -705,9 +831,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -715,12 +841,24 @@ def kvr_getPlatform():
     return houPlatform
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    if houPlatform == 'Windows':
         os.startfile(mediaFileName)
-
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 # $HIP/images/####/
 padding = 4
 frame = str(hou.intFrame()).zfill(padding)
@@ -750,9 +888,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -760,11 +898,24 @@ def kvr_getPlatform():
     return houPlatform
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-    os.startfile(mediaFileName)
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 
 # $HIP/render/
 folderName = str(hipFolder) + '/render/'
@@ -793,9 +944,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -803,11 +954,24 @@ def kvr_getPlatform():
     return houPlatform
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-    os.startfile(mediaFileName)
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 
 
 # $HIP/psx/
@@ -842,9 +1006,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -852,12 +1016,24 @@ def kvr_getPlatform():
     return houPlatform
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-    os.startfile(mediaFileName)
-
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 
 # Open the Houdini Toolbar
 # $HOUDINI_USER_PREF_DIR/toolbar/
@@ -876,11 +1052,51 @@ import os
 
 hipFolder = os.environ['HIP']
 
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system() == 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system() == 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+   
 def kvr_createFolder(mediaFileName):
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
 
+def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+        
 kvr_createFolder(str(hipFolder) + '/abc/')
 kvr_createFolder(str(hipFolder) + '/audio/')
 kvr_createFolder(str(hipFolder) + '/comp/')
@@ -906,7 +1122,8 @@ kvr_createFolder(str(hipFolder) + '/images/video/')
 kvr_createFolder(str(hipFolder) + '/images/zip/')
 
 # Open the HIP folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-os.startfile(str(hipFolder))
+kvr_showFolder(str(hipFolder))
+
 ]]></script>
   </tool>
 
@@ -931,9 +1148,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -942,11 +1159,24 @@ def kvr_getPlatform():
 
 
 def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
         os.makedirs(mediaFileName, exist_ok=True)
     # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
-    os.startfile(mediaFileName)
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
 
 
 # Select a file
@@ -1043,9 +1273,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -1073,8 +1303,6 @@ def kvr_showFusionStudio(mediaFileName):
         launchCommand.append(mediaFileName)
     elif houPlatform == 'Linux':
         launchCommand = ['xdg-open']
-        launchCommand.append(viewerPath)
-        launchCommand.append(args)
         launchCommand.append(mediaFileName)
 
     print('[Launching on ' + houPlatform + ']\n')
@@ -1111,9 +1339,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -1214,9 +1442,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -1276,9 +1504,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -1324,9 +1552,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -1372,9 +1600,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -1426,11 +1654,11 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system() == 'win32':
         houPlatform = 'Windows'
-    elif platform.system()== 'Darwin':
+    elif platform.system() == 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
@@ -1517,9 +1745,9 @@ def kvr_getPlatform():
         houPlatform = 'Windows'
     elif platform.system()== 'Darwin':
         houPlatform = 'Mac'
-    elif platform.system()== 'Linux':
+    elif platform.system() == 'Linux':
         houPlatform = 'Linux'
-    elif platform.system()== 'Linux2':
+    elif platform.system() == 'Linux2':
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
