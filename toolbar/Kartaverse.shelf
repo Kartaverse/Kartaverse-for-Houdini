@@ -9,20 +9,25 @@
     <memberTool name="Kartaverse_HomeAll_Views"/>
     <memberTool name="Kartaverse_HomeSelected_Views"/>
     <memberTool name="Kartaverse_Divider_1"/>
+    <memberTool name="Kartaverse_Create_Folder"/>
     <memberTool name="Kartaverse_HIP_Folder"/>
     <memberTool name="Kartaverse_ABC_Folder"/>
+    <memberTool name="Kartaverse_E57_Folder"/>
     <memberTool name="Kartaverse_GEO_Folder"/>
-    <memberTool name="Kartaverse_Render_Folder"/>
-    <memberTool name="Kartaverse_Video_Folder"/>
+    <memberTool name="Kartaverse_OBJ_Folder"/>
+    <memberTool name="Kartaverse_Comp_Folder"/>
     <memberTool name="Kartaverse_Images_Folder"/>
     <memberTool name="Kartaverse_Images_Frameset_Folder"/>
-    <memberTool name="Kartaverse_IPR_Folder"/>
+    <memberTool name="Kartaverse_Metadata_Folder"/>
+    <memberTool name="Kartaverse_Video_Folder"/>
+    <memberTool name="Kartaverse_Render_Folder"/>
     <memberTool name="Kartaverse_Shelf_Folder"/>
     <memberTool name="Kartaverse_Divider_2"/>
     <memberTool name="Kartaverse_camera_import"/>
     <memberTool name="Kartaverse_e57_import"/>
     <memberTool name="Kartaverse_Divider_3"/>
     <memberTool name="Kartaverse_CLI"/>
+    <memberTool name="Kartaverse_Services"/>
     <memberTool name="Kartaverse_Task"/>
     <memberTool name="Kartaverse_Help_Web"/>
     <memberTool name="Kartaverse_Shelf_Edit"/>
@@ -217,12 +222,11 @@ def kvr_showDJVSequence(mediaFileName):
     subprocess.Popen(launchCommand)
 
 
-
 hipFolder = os.environ['HIP']
 imageExt = 'exr'
-
+padding = 4
 # frameNumber = '0001'
-frameNumber = str(hou.intFrame()).zfill(4)
+frameNumber = str(hou.intFrame()).zfill(padding)
 
 # saveNumber = os.environ['SAVENUM']
 saveNumber = '0'
@@ -267,34 +271,17 @@ def kvr_getPlatform():
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
-    print('Running on ' + houPlatform + '\n')
+    # print('Running on ' + houPlatform + '\n')
     return houPlatform
 
 
 def kvr_showFolder(mediaFileName):
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
-        os.mkdir(mediaFileName)
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    os.startfile(mediaFileName)
 
-    houPlatform = kvr_getPlatform()
-    viewerPath = ''
-    args = ''
-    launchCommand = ''
-    if houPlatform == 'Mac':
-        args = '--args'
-        launchCommand = ['open']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Windows':
-        launchCommand = ['explorer']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Linux':
-        launchCommand = ['xdg-open']
-        launchCommand.append(mediaFileName)
-
-    print('[Launching Command]\n')
-    print(launchCommand)
-    import subprocess
-    subprocess.Popen(launchCommand)
 
 
 # $HIP
@@ -336,30 +323,57 @@ def kvr_getPlatform():
 def kvr_showFolder(mediaFileName):
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
-        os.mkdir(mediaFileName)
-
-    houPlatform = kvr_getPlatform()
-    viewerPath = ''
-    args = ''
-    launchCommand = ''
-    if houPlatform == 'Mac':
-        launchCommand = ['open']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Windows':
-        launchCommand = ['explorer']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Linux':
-        launchCommand = ['xdg-open']
-        launchCommand.append(mediaFileName)
-
-    print('[Launching Command]\n')
-    print(launchCommand)
-    import subprocess
-    subprocess.Popen(launchCommand)
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    os.startfile(mediaFileName)
 
 
 # $HIP/abc/
 folderName = str(hipFolder) + '/abc/'
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_E57_Folder" label="E57" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# E57 Folder
+import platform
+import sys
+import os
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    os.startfile(mediaFileName)
+
+
+# $HIP/e57/
+folderName = str(hipFolder) + '/e57/'
 
 print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
@@ -397,30 +411,57 @@ def kvr_getPlatform():
 def kvr_showFolder(mediaFileName):
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
-        os.mkdir(mediaFileName)
-
-    houPlatform = kvr_getPlatform()
-    viewerPath = ''
-    args = ''
-    launchCommand = ''
-    if houPlatform == 'Mac':
-        launchCommand = ['open']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Windows':
-        launchCommand = ['explorer']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Linux':
-        launchCommand = ['xdg-open']
-        launchCommand.append(mediaFileName)
-
-    print('[Launching Command]\n')
-    print(launchCommand)
-    import subprocess
-    subprocess.Popen(launchCommand)
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    os.startfile(mediaFileName)
 
 
 # $HIP/geo/
 folderName = str(hipFolder) + '/geo/'
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_OBJ_Folder" label="OBJ" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# OBJ Folder
+import platform
+import sys
+import os
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    os.startfile(mediaFileName)
+
+
+# $HIP/obj/
+folderName = str(hipFolder) + '/obj/'
 
 print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
@@ -458,30 +499,57 @@ def kvr_getPlatform():
 def kvr_showFolder(mediaFileName):
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
-        os.mkdir(mediaFileName)
-
-    houPlatform = kvr_getPlatform()
-    viewerPath = ''
-    args = ''
-    launchCommand = ''
-    if houPlatform == 'Mac':
-        launchCommand = ['open']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Windows':
-        launchCommand = ['explorer']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Linux':
-        launchCommand = ['xdg-open']
-        launchCommand.append(mediaFileName)
-
-    print('[Launching Command]\n')
-    print(launchCommand)
-    import subprocess
-    subprocess.Popen(launchCommand)
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    os.startfile(mediaFileName)
 
 
 # $HIP/ipr/
 folderName = str(hipFolder) + '/ipr/'
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Metadata_Folder" label="Metadata" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# Video Folder
+import platform
+import sys
+import os
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    os.startfile(mediaFileName)
+
+
+# $HIP/metadata/
+folderName = str(hipFolder) + '/metadata/'
 
 print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
@@ -519,30 +587,56 @@ def kvr_getPlatform():
 def kvr_showFolder(mediaFileName):
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
-        os.mkdir(mediaFileName)
-
-    houPlatform = kvr_getPlatform()
-    viewerPath = ''
-    args = ''
-    launchCommand = ''
-    if houPlatform == 'Mac':
-        launchCommand = ['open']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Windows':
-        launchCommand = ['explorer']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Linux':
-        launchCommand = ['xdg-open']
-        launchCommand.append(mediaFileName)
-
-    print('[Launching Command]\n')
-    print(launchCommand)
-    import subprocess
-    subprocess.Popen(launchCommand)
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    os.startfile(mediaFileName)
 
 
 # $HIP/video/
 folderName = str(hipFolder) + '/video/'
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Comp_Folder" label="Comp" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# Comp Folder
+import platform
+import sys
+import os
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    os.startfile(mediaFileName)
+
+# $HIP/comp/
+folderName = str(hipFolder) + '/comp/'
 
 print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
@@ -580,26 +674,9 @@ def kvr_getPlatform():
 def kvr_showFolder(mediaFileName):
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
-        os.mkdir(mediaFileName)
-
-    houPlatform = kvr_getPlatform()
-    viewerPath = ''
-    args = ''
-    launchCommand = ''
-    if houPlatform == 'Mac':
-        launchCommand = ['open']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Windows':
-        launchCommand = ['explorer']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Linux':
-        launchCommand = ['xdg-open']
-        launchCommand.append(mediaFileName)
-
-    print('[Launching Command]\n')
-    print(launchCommand)
-    import subprocess
-    subprocess.Popen(launchCommand)
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    os.startfile(mediaFileName)
 
 # $HIP/images/
 folderName = str(hipFolder) + '/images/'
@@ -640,31 +717,14 @@ def kvr_getPlatform():
 def kvr_showFolder(mediaFileName):
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
-        os.mkdir(mediaFileName)
-
-    houPlatform = kvr_getPlatform()
-    viewerPath = ''
-    args = ''
-    launchCommand = ''
-    if houPlatform == 'Mac':
-        launchCommand = ['open']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Windows':
-        launchCommand = ['explorer']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Linux':
-        launchCommand = ['xdg-open']
-        launchCommand.append(mediaFileName)
-
-    print('[Launching Command]\n')
-    print(launchCommand)
-    import subprocess
-    subprocess.Popen(launchCommand)
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+        os.startfile(mediaFileName)
 
 # $HIP/images/####/
 padding = 4
 frame = str(hou.intFrame()).zfill(padding)
-folderName = str(hipFolder) + '/images/' + frame + '/'
+folderName = os.path.normpath(str(hipFolder) + '/images/' + frame + '/')
 
 print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
@@ -702,26 +762,9 @@ def kvr_getPlatform():
 def kvr_showFolder(mediaFileName):
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
-        os.mkdir(mediaFileName)
-
-    houPlatform = kvr_getPlatform()
-    viewerPath = ''
-    args = ''
-    launchCommand = ''
-    if houPlatform == 'Mac':
-        launchCommand = ['open']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Windows':
-        launchCommand = ['explorer']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Linux':
-        launchCommand = ['xdg-open']
-        launchCommand.append(mediaFileName)
-
-    print('[Launching Command]\n')
-    print(launchCommand)
-    import subprocess
-    subprocess.Popen(launchCommand)
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    os.startfile(mediaFileName)
 
 # $HIP/render/
 folderName = str(hipFolder) + '/render/'
@@ -762,26 +805,9 @@ def kvr_getPlatform():
 def kvr_showFolder(mediaFileName):
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
-        os.mkdir(mediaFileName)
-
-    houPlatform = kvr_getPlatform()
-    viewerPath = ''
-    args = ''
-    launchCommand = ''
-    if houPlatform == 'Mac':
-        launchCommand = ['open']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Windows':
-        launchCommand = ['explorer']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Linux':
-        launchCommand = ['xdg-open']
-        launchCommand.append(mediaFileName)
-
-    print('[Launching Command]\n')
-    print(launchCommand)
-    import subprocess
-    subprocess.Popen(launchCommand)
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    os.startfile(mediaFileName)
 
 
 # $HIP/psx/
@@ -828,26 +854,9 @@ def kvr_getPlatform():
 def kvr_showFolder(mediaFileName):
     # Create the intermediate folders
     if not os.path.exists(mediaFileName):
-        os.mkdir(mediaFileName)
-
-    houPlatform = kvr_getPlatform()
-    viewerPath = ''
-    args = ''
-    launchCommand = ''
-    if houPlatform == 'Mac':
-        launchCommand = ['open']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Windows':
-        launchCommand = ['explorer']
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Linux':
-        launchCommand = ['xdg-open']
-        launchCommand.append(mediaFileName)
-
-    print('[Launching Command]\n')
-    print(launchCommand)
-    import subprocess
-    subprocess.Popen(launchCommand)
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    os.startfile(mediaFileName)
 
 
 # Open the Houdini Toolbar
@@ -856,6 +865,48 @@ folderName = str(userPrefsfolder) + '/toolbar/'
 
 print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Create_Folder" label="Create HIP Sub-Folders" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# Create Folders
+import platform
+import sys
+import os
+
+hipFolder = os.environ['HIP']
+
+def kvr_createFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.makedirs(mediaFileName, exist_ok=True)
+
+kvr_createFolder(str(hipFolder) + '/abc/')
+kvr_createFolder(str(hipFolder) + '/audio/')
+kvr_createFolder(str(hipFolder) + '/comp/')
+kvr_createFolder(str(hipFolder) + '/desk/')
+kvr_createFolder(str(hipFolder) + '/dxo/texture/')
+kvr_createFolder(str(hipFolder) + '/dxo/reconstruction/')
+kvr_createFolder(str(hipFolder) + '/e57/')
+kvr_createFolder(str(hipFolder) + '/flip/')
+kvr_createFolder(str(hipFolder) + '/geo/')
+kvr_createFolder(str(hipFolder) + '/hda/')
+kvr_createFolder(str(hipFolder) + '/images/0001/')
+kvr_createFolder(str(hipFolder) + '/images/0001/texture/')
+kvr_createFolder(str(hipFolder) + '/images/0001/reconstruction/')
+kvr_createFolder(str(hipFolder) + '/images/logs/')
+kvr_createFolder(str(hipFolder) + '/images/metadata/')
+kvr_createFolder(str(hipFolder) + '/images/metadata/xmp/')
+kvr_createFolder(str(hipFolder) + '/images/obj/')
+kvr_createFolder(str(hipFolder) + '/images/render/')
+kvr_createFolder(str(hipFolder) + '/images/scripts/')
+kvr_createFolder(str(hipFolder) + '/images/screenshots/')
+kvr_createFolder(str(hipFolder) + '/images/tex/')
+kvr_createFolder(str(hipFolder) + '/images/video/')
+kvr_createFolder(str(hipFolder) + '/images/zip/')
+
+# Open the HIP folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+os.startfile(str(hipFolder))
 ]]></script>
   </tool>
 
@@ -890,34 +941,12 @@ def kvr_getPlatform():
     return houPlatform
 
 
-def kvr_showMetashape(mediaFileName):
-    houPlatform = kvr_getPlatform()
-    viewerPath = ''
-    args = ''
-    launchCommand = ''
-    if houPlatform == 'Mac':
-        viewerPath = '/Applications/Metashape/Metashape.app'
-        launchCommand = ['open']
-        launchCommand.append('-a')
-        launchCommand.append(viewerPath)
-        launchCommand.append(args)
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Windows':
-        launchCommand = ['explorer']
-        launchCommand.append(viewerPath)
-        launchCommand.append(args)
-        launchCommand.append(mediaFileName)
-    elif houPlatform == 'Linux':
-        launchCommand = ['xdg-open']
-        launchCommand.append(viewerPath)
-        launchCommand.append(args)
-        launchCommand.append(mediaFileName)
-
-    print('[Launching on ' + houPlatform + ']\n')
-    print('[Launching Command]\n')
-    print(launchCommand)
-    import subprocess
-    subprocess.Popen(launchCommand)
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    os.startfile(mediaFileName)
 
 
 # Select a file
@@ -1191,7 +1220,7 @@ def kvr_getPlatform():
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
-    print('Running on ' + houPlatform + '\n')
+    # print('Running on ' + houPlatform + '\n')
     return houPlatform
 
 
@@ -1209,15 +1238,19 @@ def kvr_showTaskManager():
         launchCommand.append('-a')
         launchCommand.append(viewerPath)
     elif houPlatform == 'Windows':
-        launchCommand = ['explorer']
-        launchCommand.append(viewerPath)
+        launchCommand = ['powershell']
+        launchCommand.append('start-process')
+        launchCommand.append('powershell')
+        launchCommand.append('-verb')
+        launchCommand.append('runAs')
+        launchCommand.append('taskmgr')
     elif houPlatform == 'Linux':
         launchCommand = ['xdg-open']
         launchCommand.append(viewerPath)
 
-    print('[Launching on ' + houPlatform + ']\n')
-    print('[Launching Command]\n')
-    print(launchCommand)
+    # print('[Launching on ' + houPlatform + ']\n')
+    # print('[Launching Command]\n')
+    # print(launchCommand)
     import subprocess
     subprocess.Popen(launchCommand)
 
@@ -1263,12 +1296,13 @@ def kvr_showCLI():
         launchCommand.append('-a')
         launchCommand.append(viewerPath)
 
-        print('[Launching on ' + houPlatform + ']\n')
-        print('[Launching Command]\n')
-        print(launchCommand)
+        # print('[Launching on ' + houPlatform + ']\n')
+        # print('[Launching Command]\n')
+        # print(launchCommand)
         import subprocess
         subprocess.Popen(launchCommand)
-
+    if houPlatform == 'Windows':
+        os.system('start cmd /k')
 kvr_showCLI()
 ]]></script>
   </tool>
@@ -1344,7 +1378,7 @@ def kvr_getPlatform():
         houPlatform = 'Linux'
     else:
         houPlatform = 'Linux'
-    print('Running on ' + houPlatform + '\n')
+    # print('Running on ' + houPlatform + '\n')
     return houPlatform
 
 
@@ -1357,18 +1391,16 @@ def kvr_showWebpage(filename):
         args = '--args'
         launchCommand = ['open']
         launchCommand.append(filename)
+        
+        print('[Launching Command]\n')
+        print(launchCommand)
+        import subprocess
+        subprocess.Popen(launchCommand)
     elif houPlatform == 'Windows':
-        launchCommand = ['start']
-        launchCommand.append(filename)
+        # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+        os.startfile(filename)
     elif houPlatform == 'Linux':
-        launchCommand.append('xdg-open')
-        launchCommand.append(filename)
-
-    print('[Launching Command]\n')
-    print(launchCommand)
-    import subprocess
-    subprocess.Popen(launchCommand)
-
+        os.startfile(filename)
 
 #weblink = 'https://github.com/kartaverse'
 weblink = 'https://kartaverse.github.io/Kartaverse-for-Houdini/'
@@ -1420,12 +1452,16 @@ def kvr_showFolder(mediaFileName):
         launchCommand.append('bbedit')
         launchCommand.append(mediaFileName)
     elif houPlatform == 'Windows':
-        launchCommand = ['explorer']
+        launchCommand = ['start']
+        launchCommand = ['""']
+        launchCommand = ['notepad++.exe']
+        #launchCommand = ['notepad']
         launchCommand.append(mediaFileName)
     elif houPlatform == 'Linux':
-        launchCommand = ['xdg-open']
+        launchCommand = ['gedit']
         launchCommand.append(mediaFileName)
-
+        launchCommand.append("&")
+        
     print('[Launching Command]\n')
     print(launchCommand)
     import subprocess
@@ -1463,4 +1499,62 @@ for x in viewer.viewports():
   <toolshelf name="Videogrammetry" label="KVR Videogrammetry"/>
 
   <toolshelf name="LIDAR" label="KVR LIDAR"/>
+
+  <tool name="Kartaverse_Services" label="System Services" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_preferences.png">
+    <script scriptType="python"><![CDATA[# Systen Services
+import platform
+import sys
+import os
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+
+def kvr_showTaskManager():
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        args = '--args'
+        viewerPath = '/System/Applications/Utilities/Activity Monitor.app'
+
+        # Build the launchCommand list using append to
+        launchCommand = ['open']
+        launchCommand.append('-a')
+        launchCommand.append(viewerPath)
+    elif houPlatform == 'Windows':
+        launchCommand = ['control']
+        launchCommand.append('schedtasks')
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(viewerPath)
+
+    # print('[Launching on ' + houPlatform + ']\n')
+    # print('[Launching Command]\n')
+    # print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+
+kvr_showTaskManager()
+]]></script>
+  </tool>
 </shelfDocument>
