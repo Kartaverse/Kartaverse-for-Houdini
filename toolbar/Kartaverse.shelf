@@ -1,0 +1,1466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shelfDocument>
+  <!-- This file contains definitions of shelves, toolbars, and tools.
+ It should not be hand-edited when it is being used by the application.
+ Note, that two definitions of the same element are not allowed in
+ a single file. -->
+
+  <toolshelf name="Kartaverse" label="Kartaverse">
+    <memberTool name="Kartaverse_HomeAll_Views"/>
+    <memberTool name="Kartaverse_HomeSelected_Views"/>
+    <memberTool name="Kartaverse_Divider_1"/>
+    <memberTool name="Kartaverse_HIP_Folder"/>
+    <memberTool name="Kartaverse_ABC_Folder"/>
+    <memberTool name="Kartaverse_GEO_Folder"/>
+    <memberTool name="Kartaverse_Render_Folder"/>
+    <memberTool name="Kartaverse_Video_Folder"/>
+    <memberTool name="Kartaverse_Images_Folder"/>
+    <memberTool name="Kartaverse_Images_Frameset_Folder"/>
+    <memberTool name="Kartaverse_IPR_Folder"/>
+    <memberTool name="Kartaverse_Shelf_Folder"/>
+    <memberTool name="Kartaverse_Divider_2"/>
+    <memberTool name="Kartaverse_camera_import"/>
+    <memberTool name="Kartaverse_e57_import"/>
+    <memberTool name="Kartaverse_Divider_3"/>
+    <memberTool name="Kartaverse_CLI"/>
+    <memberTool name="Kartaverse_Task"/>
+    <memberTool name="Kartaverse_Help_Web"/>
+    <memberTool name="Kartaverse_Shelf_Edit"/>
+  </toolshelf>
+
+  <tool name="Kartaverse_camera_import" label="Cam Import" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_import.png">
+    <script scriptType="python"><![CDATA[# Camera Import
+import os
+import sys
+import hou
+import toolutils
+
+
+# Select a file
+#filename = hou.ui.selectFile(start_directory = os.environ['HIP'] + '', title = 'Camera File Browser', pattern = '*.xmp', collapse_sequences = False, image_chooser = False, chooser_mode = hou.fileChooserMode.ReadAndWrite)
+#print('[XMP File] ' + filename)
+
+# Add a Camera container "/obj/cam1"
+#container = hou.node('/obj').createNode('geo', 'cam1', run_init_scripts=False, load_contents=True)
+
+# Add a "Camera" SOP node
+# https://www.sidefx.com/docs/houdini/nodes/obj/cam.html
+#cam_node = hou.node(container.path()).createNode('camera', 'camera')
+
+# Autolayout the view
+#hou.node(container.path()).layoutChildren()
+
+import toolutils
+pane = toolutils.activePane(kwargs)
+
+# When launched from a scene view, always create a camera that matches
+# the current viewpoint.
+clicktoplace = False
+lock_to_view = kwargs['ctrlclick'] or kwargs['cmdclick']
+
+import loptoolutils
+if (loptoolutils.getToolCategoryForPane(pane) == hou.lopNodeTypeCategory()):
+    newnode = loptoolutils.genericCameraLightTool(kwargs, 'camera', 'camera1', clicktoplace, lock_to_view)
+else:
+    import objecttoolutils
+    kwargs['bbox_min'] = hou.Vector3(-0.1, -0.1, 0.0001)
+    kwargs['bbox_max'] = hou.Vector3(0.1, 0.236, 0.431)
+    newnode = objecttoolutils.genericCameraLightTool(kwargs, 'cam', 'cam1', clicktoplace, lock_to_view)
+# Autolayout the view
+hou.node(newnode.layoutChildren())
+
+# "Home All" will fit the point cloud in the view
+viewer = toolutils.sceneViewer()
+# Scan through each of the scene viewports - typically a quad view and persp1 is what we care about.
+for x in viewer.viewports():
+    x.homeAll()
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_e57_import" label="E57 Import" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_import.png">
+    <script scriptType="python"><![CDATA[# e57 Lidar Import
+import os
+import sys
+import hou
+import toolutils
+
+
+# Select a file
+filename = hou.ui.selectFile(start_directory = os.environ['HIP'] + '/e57/', title = 'E57 File Browser', pattern = '*.e57', collapse_sequences = False, image_chooser = False, chooser_mode = hou.fileChooserMode.ReadAndWrite)
+print('[e57 File] ' + filename)
+
+# Add a Comp container "/obj/geo1"
+container = hou.node('/obj').createNode('geo', 'geo_e57', run_init_scripts=False, load_contents=True)
+
+# Add a "Lidar Import" Geometry SOP node
+# https://www.sidefx.com/docs/houdini/nodes/sop/lidarimport
+e57_node = hou.node(container.path()).createNode('lidarimport', 'lidar_import_e57')
+
+# Filename - Set from the dialog
+file_parm = e57_node.parm('filename')
+file_parm.set(filename)
+
+# Color - From Point Cloud
+color_parm = e57_node.parm('color')
+color_parm.set(1)
+
+# Select the Lidar Import node
+e57_node.setDisplayFlag(True)
+e57_node.setRenderFlag(True)
+e57_node.setSelected(True)
+
+# Todo:
+# Connect Lidar Import > file_write_bgeo (File Mode=Write Files, Geo File = $Hip/geo/(e57 basename without ext).bgeo
+
+# Autolayout the view
+hou.node(container.path()).layoutChildren()
+
+# "Home All" will fit the point cloud in the view
+viewer = toolutils.sceneViewer()
+# Scan through each of the scene viewports - typically a quad view and persp1 is what we care about.
+for x in viewer.viewports():
+    x.homeAll()
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_HomeAll_Views" label="Home All" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_reset_options.png">
+    <script scriptType="python"><![CDATA[# Home All
+import os
+import sys
+import hou
+import toolutils
+
+
+# "Home All" will fit the point cloud in the view
+viewer = toolutils.sceneViewer()
+
+# Scan through each of the scene viewports - typically a quad view and persp1 is what we care about.
+for x in viewer.viewports():
+    x.homeAll()
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_HomeSelected_Views" label="Home Selected" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_selectAll.png">
+    <script scriptType="python"><![CDATA[# Home Selected
+import os
+import sys
+import hou
+import toolutils
+
+
+# "Fit All" will fit the point cloud in the view
+viewer = toolutils.sceneViewer()
+# Scan through each of the scene viewports - typically a quad view and persp1 is what we care about.
+for x in viewer.viewports():
+    x.homeSelected()
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_DJV" label="DJV Viewer" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_show_sequence.png">
+    <script scriptType="python"><![CDATA[# DJV
+import platform
+import sys
+import os
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showDJVSequence(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        args = '--args'
+        viewerPath = '/Applications/DJV.app'
+        #viewerPath = '/Applications/DJV2.app'
+        launchCommand = ['open']
+        launchCommand.append('-a')
+        launchCommand.append(viewerPath)
+        launchCommand.append(args)
+
+        # Single Frame Image
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Windows':
+        #viewerPath = 'djv_view.exe'
+        viewerPath = 'C:/Program Files/DJV/bin/djv_view.exe'
+        launchCommand = ['start']
+        launchCommand.append('""')
+        launchCommand.append(viewerPath)
+        launchCommand.append(args)
+    elif houPlatform == 'Linux':
+        viewerPath = 'djv_view'
+        launchCommand.append(viewerPath)
+        launchCommand.append(args)
+        launchCommand.append(&)
+    print('[Launching DJV on ' + houPlatform + ']\n')
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+
+
+hipFolder = os.environ['HIP']
+imageExt = 'exr'
+
+# frameNumber = '0001'
+frameNumber = str(hou.intFrame()).zfill(4)
+
+# saveNumber = os.environ['SAVENUM']
+saveNumber = '0'
+
+#snapName = os.environ['SNAPNAME']
+snapName = 'Active_Render'
+
+# Open DJV View
+snapshotImage = str(hipFolder) + '/ipr/' + str(snapName) + '.' + str(frameNumber) + '.' + (saveNumber) + '.' + str(imageExt)
+
+print('[Loading Image] ' + snapshotImage)
+kvr_showDJVSequence(snapshotImage)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Divider_1" label="Divider" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_divider.png">
+    <script scriptType="python"><![CDATA[print('Divider Bar')]]></script>
+  </tool>
+
+  <tool name="Kartaverse_HIP_Folder" label="HIP" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# HIP Folder
+import platform
+import sys
+import os
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.mkdir(mediaFileName)
+
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        args = '--args'
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Windows':
+        launchCommand = ['explorer']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(mediaFileName)
+
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+
+# $HIP
+folderName = str(hipFolder)
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_ABC_Folder" label="ABC" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# ABC Folder
+import platform
+import sys
+import os
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.mkdir(mediaFileName)
+
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Windows':
+        launchCommand = ['explorer']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(mediaFileName)
+
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+
+# $HIP/abc/
+folderName = str(hipFolder) + '/abc/'
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_GEO_Folder" label="GEO" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# GEO Folder
+import platform
+import sys
+import os
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.mkdir(mediaFileName)
+
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Windows':
+        launchCommand = ['explorer']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(mediaFileName)
+
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+
+# $HIP/geo/
+folderName = str(hipFolder) + '/geo/'
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_IPR_Folder" label="IPR" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# IPR Folder
+import platform
+import sys
+import os
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.mkdir(mediaFileName)
+
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Windows':
+        launchCommand = ['explorer']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(mediaFileName)
+
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+
+# $HIP/ipr/
+folderName = str(hipFolder) + '/ipr/'
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Video_Folder" label="Video" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# Video Folder
+import platform
+import sys
+import os
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.mkdir(mediaFileName)
+
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Windows':
+        launchCommand = ['explorer']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(mediaFileName)
+
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+
+# $HIP/video/
+folderName = str(hipFolder) + '/video/'
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Images_Folder" label="Images" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# Images Folder
+import platform
+import sys
+import os
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.mkdir(mediaFileName)
+
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Windows':
+        launchCommand = ['explorer']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(mediaFileName)
+
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+# $HIP/images/
+folderName = str(hipFolder) + '/images/'
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Images_Frameset_Folder" label="####" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# Images Frameset Folder
+import platform
+import sys
+import os
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.mkdir(mediaFileName)
+
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Windows':
+        launchCommand = ['explorer']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(mediaFileName)
+
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+# $HIP/images/####/
+padding = 4
+frame = str(hou.intFrame()).zfill(padding)
+folderName = str(hipFolder) + '/images/' + frame + '/'
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Render_Folder" label="Render" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# Render Folder
+import platform
+import sys
+import os
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.mkdir(mediaFileName)
+
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Windows':
+        launchCommand = ['explorer']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(mediaFileName)
+
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+# $HIP/render/
+folderName = str(hipFolder) + '/render/'
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_PSX_Folder" label="PSX" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# PSX Folder
+import platform
+import sys
+import os
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.mkdir(mediaFileName)
+
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Windows':
+        launchCommand = ['explorer']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(mediaFileName)
+
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+
+# $HIP/psx/
+folderName = str(hipFolder) + '/psx/'
+
+if not os.path.exists(folderName):
+    os.mkdir(folderName)
+    print('[Creating Folder] ' + folderName)
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Shelf_Folder" label="Shelf" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# Houdini Shelf
+import platform
+import sys
+import os
+
+userPrefsfolder = os.environ['HOUDINI_USER_PREF_DIR']
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.mkdir(mediaFileName)
+
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Windows':
+        launchCommand = ['explorer']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(mediaFileName)
+
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+
+# Open the Houdini Toolbar
+# $HOUDINI_USER_PREF_DIR/toolbar/
+folderName = str(userPrefsfolder) + '/toolbar/'
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Divider_2" label="Divider" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_divider.png">
+    <script scriptType="python"><![CDATA[print('Divider Bar')]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Metashape" label="Metashape" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_metashape.png">
+    <script scriptType="python"><![CDATA[# Metashape
+import platform
+import sys
+import os
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+
+def kvr_showMetashape(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        viewerPath = '/Applications/Metashape/Metashape.app'
+        launchCommand = ['open']
+        launchCommand.append('-a')
+        launchCommand.append(viewerPath)
+        launchCommand.append(args)
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Windows':
+        launchCommand = ['explorer']
+        launchCommand.append(viewerPath)
+        launchCommand.append(args)
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(viewerPath)
+        launchCommand.append(args)
+        launchCommand.append(mediaFileName)
+
+    print('[Launching on ' + houPlatform + ']\n')
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+
+# Select a file
+filename = hou.ui.selectFile(start_directory = os.environ['HIP'] + '/..', title = 'Metashape .PSX File Browser', pattern='*.psx', collapse_sequences = False, image_chooser = False, chooser_mode = hou.fileChooserMode.ReadAndWrite)
+print('[Metashape File] ' + filename)
+
+# Open AGI Metashape
+kvr_showMetashape(filename)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_RC" label="Reality Capture" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_realityCapture.png">
+    <script scriptType="python"><![CDATA[# Reality Capture
+import platform
+import sys
+import os
+
+def kvr_showRealityCapture(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Windows':
+        viewerPath = 'C:/Program Files/Capturing Reality/RealityCapture/RealityCapture.exe'
+        launchCommand = ['start']
+        launchCommand.append('""')
+        launchCommand.append(viewerPath)
+        launchCommand.append(mediaFileName)
+
+        print('[Launching on ' + houPlatform + ']\n')
+        print('[Launching Command]\n')
+        print(launchCommand)
+        import subprocess
+        subprocess.Popen(launchCommand)
+
+
+# Select a file
+filename = hou.ui.selectFile(start_directory = os.environ['HIP'] + '/..', title = 'Reality Capture .rcproj File Browser', pattern='*.rcproj', collapse_sequences = False, image_chooser = False, chooser_mode = hou.fileChooserMode.ReadAndWrite)
+print('[Reality Capture File] ' + filename)
+
+# Open Reality Capture
+kvr_showRealityCapture(filename)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Unreal" label="Unreal" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_unrealEngine.png">
+    <script scriptType="python"><![CDATA[# Unreal
+import platform
+import sys
+import os
+
+def kvr_showUnrealEngine(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Windows':
+        viewerPath = 'C:/Program Files (x86)/Epic Games/Launche/Portal/Binaries/Win32/EpicGamesLauncher.exe'
+        launchCommand = ['start']
+        launchCommand.append('""')
+        launchCommand.append(viewerPath)
+
+        print('[Launching on ' + houPlatform + ']\n')
+        print('[Launching Command]\n')
+        print(launchCommand)
+        import subprocess
+        subprocess.Popen(launchCommand)
+
+
+# Select a file
+filename = ""
+#filename = hou.ui.selectFile(start_directory = os.environ['HIP'] + '/..', title = 'Reality Capture .rcproj File Browser', pattern='*.rcproj', collapse_sequences = False, image_chooser = False, chooser_mode = hou.fileChooserMode.ReadAndWrite)
+#print('[Epic Unreal File] ' + filename)
+
+# Open Unreal
+kvr_showUnrealEngine(filename)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_FusionStudio" label="Fusion Studio" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_fusion.png">
+    <script scriptType="python"><![CDATA[# Fusion Studio
+import platform
+import sys
+import os
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFusionStudio(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        viewerPath = '/Applications/Blackmagic Fusion 19/Fusion.app'
+
+        # Build the launchCommand list using append to
+        launchCommand = ['open']
+        launchCommand.append('-a')
+        launchCommand.append(viewerPath)
+        launchCommand.append(args)
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Windows':
+        launchCommand = ['explorer']
+        launchCommand.append(viewerPath)
+        launchCommand.append(args)
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(viewerPath)
+        launchCommand.append(args)
+        launchCommand.append(mediaFileName)
+
+    print('[Launching on ' + houPlatform + ']\n')
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+
+# Select a file
+filename = ""
+#filename = hou.ui.selectFile(start_directory = os.environ['HIP'] + '/comp/', title = 'Fusion Studio .comp File Browser', pattern='*.comp', collapse_sequences = False, image_chooser = False, chooser_mode = hou.fileChooserMode.ReadAndWrite)
+print('[Fusion Studio File] ' + filename)
+
+# Open Fusion Studio
+kvr_showFusionStudio(filename)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_ResolveStudio" label="Resolve Studio" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_davinciResolve.png">
+    <script scriptType="python"><![CDATA[# Resolve Studio
+import platform
+import sys
+import os
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showResolveStudio(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        viewerPath = '/Applications/DaVinci Resolve/DaVinci Resolve.app'
+        launchCommand = ['open']
+        launchCommand.append('-a')
+        launchCommand.append(viewerPath)
+        launchCommand.append(args)
+        launchCommand.append(mediaFileName)
+
+        print('[Launching on ' + houPlatform + ']\n')
+        print('[Launching Command]\n')
+        print(launchCommand)
+        import subprocess
+        subprocess.Popen(launchCommand)
+
+
+# Select a file
+filename = ""
+#filename = hou.ui.selectFile(start_directory = os.environ['HIP'] + '/comp/', title = 'Resolve Studio .comp File Browser', pattern='*.comp', collapse_sequences = False, image_chooser = False, chooser_mode = hou.fileChooserMode.ReadAndWrite)
+print('[Resolve Studio Comp File] ' + filename)
+
+# Open Resolve Studio
+kvr_showResolveStudio(filename)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_NukeX" label="NukeX" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_nuke.png">
+    <script scriptType="python"><![CDATA[# NukeX
+import platform
+import sys
+import os
+
+def kvr_showNukeX(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        args = '--args --nukex'
+        launchCommand = ''
+
+        # Running on Mac
+        # https://learn.foundry.com/nuke/15.1/content/getting_started/installation/launching_nuke_mac.html
+        viewerPath = '/Applications/Nuke15.1v2/Nuke15.1 '
+
+        # Build the launchCommand list using append to
+        launchCommand = ['open']
+        launchCommand.append('-a')
+        launchCommand.append(viewerPath)
+        launchCommand.append(args)
+        launchCommand.append(mediaFileName)
+
+        print('[Launching on ' + houPlatform + ']\n')
+        print('[Launching Command]\n')
+        print(launchCommand)
+        import subprocess
+        subprocess.Popen(launchCommand)
+
+
+# Select a file
+filename = ""
+#filename = hou.ui.selectFile(start_directory = os.environ['HIP'] + '/comp/', title = 'NukeX .nk Script File Browser', pattern='*.nk', collapse_sequences = False, image_chooser = False, chooser_mode = hou.fileChooserMode.ReadAndWrite)
+print('[NukeX Script File] ' + filename)
+
+# Open NukeX
+kvr_showNukeX(filename)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Divider_3" label="Divider" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_divider.png">
+    <script scriptType="python"><![CDATA[print('Divider Bar')]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Task" label="Task Manager" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_task.png">
+    <script scriptType="python"><![CDATA[# Activity Monitor
+import platform
+import sys
+import os
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+
+def kvr_showTaskManager():
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        args = '--args'
+        viewerPath = '/System/Applications/Utilities/Activity Monitor.app'
+
+        # Build the launchCommand list using append to
+        launchCommand = ['open']
+        launchCommand.append('-a')
+        launchCommand.append(viewerPath)
+    elif houPlatform == 'Windows':
+        launchCommand = ['explorer']
+        launchCommand.append(viewerPath)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(viewerPath)
+
+    print('[Launching on ' + houPlatform + ']\n')
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+
+kvr_showTaskManager()
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_CLI" label="Terminal" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_options.png">
+    <script scriptType="python"><![CDATA[# Terminal
+import platform
+import sys
+import os
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showCLI():
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        viewerPath = '/System/Applications/Utilities/Terminal.app'
+        launchCommand = ['open']
+        launchCommand.append('-a')
+        launchCommand.append(viewerPath)
+
+        print('[Launching on ' + houPlatform + ']\n')
+        print('[Launching Command]\n')
+        print(launchCommand)
+        import subprocess
+        subprocess.Popen(launchCommand)
+
+kvr_showCLI()
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Metadata" label="Spatial Metadata" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_metadata.png">
+    <script scriptType="python"><![CDATA[# Spatial Metadata
+import platform
+import sys
+import os
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showSpatialMetadata():
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        viewerPath = '/Applications/Spatial Metadata GUI/Spatial Metadata GUI.app'
+        launchCommand = ['open']
+        launchCommand.append('-a')
+        launchCommand.append(viewerPath)
+
+        print('[Launching on ' + houPlatform + ']\n')
+        print('[Launching Command]\n')
+        print(launchCommand)
+        import subprocess
+        subprocess.Popen(launchCommand)
+
+
+kvr_showSpatialMetadata()
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Help_Web" label="Help" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_help.png">
+    <script scriptType="python"><![CDATA[# Help
+import platform
+import sys
+import os
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+
+def kvr_showWebpage(filename):
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        args = '--args'
+        launchCommand = ['open']
+        launchCommand.append(filename)
+    elif houPlatform == 'Windows':
+        launchCommand = ['start']
+        launchCommand.append(filename)
+    elif houPlatform == 'Linux':
+        launchCommand.append('xdg-open')
+        launchCommand.append(filename)
+
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+
+#weblink = 'https://github.com/kartaverse'
+weblink = 'https://kartaverse.github.io/Kartaverse-for-Houdini/'
+print('[Showing Webapage] ' + weblink)
+kvr_showWebpage(weblink)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_Shelf_Edit" label="Edit Shelf" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_edit.png">
+    <script scriptType="python"><![CDATA[# Houdini Toolbar
+import platform
+import sys
+import os
+
+userPrefsfolder = os.environ['HOUDINI_USER_PREF_DIR']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system()== 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system()== 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.mkdir(mediaFileName)
+
+    houPlatform = kvr_getPlatform()
+    viewerPath = ''
+    args = ''
+    launchCommand = ''
+    if houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append('-a')
+        launchCommand.append('bbedit')
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Windows':
+        launchCommand = ['explorer']
+        launchCommand.append(mediaFileName)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(mediaFileName)
+
+    print('[Launching Command]\n')
+    print(launchCommand)
+    import subprocess
+    subprocess.Popen(launchCommand)
+
+
+# Open the Houdini Toolbar
+# $HOUDINI_USER_PREF_DIR/toolbar/
+folderName = str(userPrefsfolder) + '/toolbar/Kartaverse.shelf'
+
+# $HIP
+# folderName = str(hipFolder)
+
+print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_HomeSelected_Views" label="Home Selected" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_selectAll.png">
+    <script scriptType="python"><![CDATA[# Home Selected
+import os
+import sys
+import hou
+import toolutils
+
+
+# "Fit All" will fit the point cloud in the view
+viewer = toolutils.sceneViewer()
+# Scan through each of the scene viewports - typically a quad view and persp1 is what we care about.
+for x in viewer.viewports():
+    x.homeSelected()
+]]></script>
+  </tool>
+
+  <toolshelf name="Videogrammetry" label="KVR Videogrammetry"/>
+
+  <toolshelf name="LIDAR" label="KVR LIDAR"/>
+</shelfDocument>
