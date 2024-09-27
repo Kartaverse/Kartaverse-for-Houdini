@@ -1633,7 +1633,7 @@ def kvr_showWebpage(filename):
 
 #weblink = 'https://github.com/kartaverse'
 weblink = 'https://kartaverse.github.io/Kartaverse-for-Houdini/'
-print('[Showing Webapage] ' + weblink)
+print('[Showing Webpage] ' + weblink)
 kvr_showWebpage(weblink)
 ]]></script>
   </tool>
