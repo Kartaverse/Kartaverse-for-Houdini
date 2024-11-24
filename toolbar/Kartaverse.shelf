@@ -89,6 +89,10 @@ import sys
 import hou
 import toolutils
 
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
 
 # Select a file
 filename = hou.ui.selectFile(start_directory = os.environ['HIP'] + '/e57/', title = 'E57 File Browser', pattern = '*.e57', collapse_sequences = False, image_chooser = False, chooser_mode = hou.fileChooserMode.ReadAndWrite)
@@ -221,6 +225,10 @@ def kvr_showDJVSequence(mediaFileName):
     import subprocess
     subprocess.Popen(launchCommand)
 
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
 
 hipFolder = os.environ['HIP']
 imageExt = 'exr'
@@ -251,6 +259,11 @@ kvr_showDJVSequence(snapshotImage)
 import platform
 import sys
 import os
+
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
 
 hipFolder = os.environ['HIP']
 
@@ -309,6 +322,11 @@ import platform
 import sys
 import os
 
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
+
 hipFolder = os.environ['HIP']
 
 # Check the operating system
@@ -364,6 +382,11 @@ kvr_showFolder(folderName)
 import platform
 import sys
 import os
+
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
 
 hipFolder = os.environ['HIP']
 
@@ -422,6 +445,11 @@ import platform
 import sys
 import os
 
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
+
 hipFolder = os.environ['HIP']
 
 # Check the operating system
@@ -478,6 +506,11 @@ kvr_showFolder(folderName)
 import platform
 import sys
 import os
+
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
 
 hipFolder = os.environ['HIP']
 
@@ -536,6 +569,11 @@ import platform
 import sys
 import os
 
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
+
 hipFolder = os.environ['HIP']
 
 # Check the operating system
@@ -593,6 +631,11 @@ import platform
 import sys
 import os
 
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
+
 hipFolder = os.environ['HIP']
 
 # Check the operating system
@@ -648,6 +691,11 @@ kvr_showFolder(folderName)
 import platform
 import sys
 import os
+
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
 
 hipFolder = os.environ['HIP']
 
@@ -706,6 +754,11 @@ import platform
 import sys
 import os
 
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
+
 hipFolder = os.environ['HIP']
 
 # Check the operating system
@@ -762,6 +815,11 @@ import platform
 import sys
 import os
 
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
+
 hipFolder = os.environ['HIP']
 
 # Check the operating system
@@ -817,6 +875,11 @@ kvr_showFolder(folderName)
 import platform
 import sys
 import os
+
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
 
 hipFolder = os.environ['HIP']
 
@@ -876,6 +939,11 @@ import platform
 import sys
 import os
 
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
+
 hipFolder = os.environ['HIP']
 
 # Check the operating system
@@ -931,6 +999,11 @@ kvr_showFolder(folderName)
 import platform
 import sys
 import os
+
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
 
 hipFolder = os.environ['HIP']
 
@@ -993,6 +1066,11 @@ import platform
 import sys
 import os
 
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
+
 userPrefsfolder = os.environ['HOUDINI_USER_PREF_DIR']
 hipFolder = os.environ['HIP']
 
@@ -1050,6 +1128,11 @@ kvr_showFolder(folderName)
 import platform
 import sys
 import os
+
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
 
 hipFolder = os.environ['HIP']
 
