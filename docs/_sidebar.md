@@ -13,6 +13,7 @@
 		- [Project Hierarchy](volumetric_video/project_hierarchy)
 		- [TOPs Basics](volumetric_video/tops_basics)
 		- [Videogrammetry Notes](volumetric_video/notes)
+		- [Reality Capture XML Files](volumetric_video/xml_files.md)
 		- [Preparing XR Stage Deliverables](volumetric_video/preparing_xr_stage_deliverables.md)
 		- [DxO Optics PhotoLab](volumetric_video/dxo_optics_photolab.md)
 		- TOPs Example HIP Projects:
