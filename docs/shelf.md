@@ -12,8 +12,6 @@ These shelf tools are available on the [Kartaverse for Houdini GitHub project pa
 
 ## Toolbar Installation
 
-
-
 Copy the "toolbar" folder contents from the "Kartaverse for Houdini" GitHub repo into the Houdini toolbar folder.
 
 ![](Images/shelf-folder-contents.png)

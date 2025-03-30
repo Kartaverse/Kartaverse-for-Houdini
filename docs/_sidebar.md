@@ -8,6 +8,8 @@
 	- Render Fusion Comps in Houdini TOPs
 		- [TOPs Workflow](fusion/tops_workflow)
 		- [Running Fusion Actions](fusion/running_fusion_actions)
+	- 3DGS Workflows
+		- [Jawset Postshot 3DGS Automation](postshot)
 	- Volumetric Video Workflows
 		- [Overview](volumetric_video/overview)
 		- [Project Hierarchy](volumetric_video/project_hierarchy)
