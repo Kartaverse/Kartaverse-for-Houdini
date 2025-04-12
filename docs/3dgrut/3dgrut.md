@@ -4,6 +4,10 @@ If you are interested in volumetric rendering and 3DGS (3D Gaussian Splatting) t
 
 ## Gaussian Raytracing Screenshots
 
+3DGRUT Screen Recording:
+
+[Video](Images/NVIDIA_3dgrut_interactive_gaussian_raytracing.mp4 ':include :type=video controls width=100%')
+
 3DGRUT Model Training:
 
 ![3DGRUT Train](Images/NVIDIA_3dgrut_training.png)
@@ -13,9 +17,7 @@ If you are interested in volumetric rendering and 3DGS (3D Gaussian Splatting) t
 
 ![3DGRUT Playground](Images/NVIDIA_3dgrut_playground_with_wavefront_obj_bunny.png)
 
-3DGRUT Screen Recording:
-
-[Video](Images/NVIDIA_3dgrut_interactive_gaussian_raytracing.mp4 ':include :type=video controls width=100%')
+![3DGRUT Playground](Images/NVIDIA_3dgrut_playground_lego.png)
 
 ## Setup the Conda environment on MintOS Linux
 
