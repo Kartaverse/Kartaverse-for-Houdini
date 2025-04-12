@@ -14,11 +14,11 @@ If you are interested in volumetric rendering and 3DGS (3D Gaussian Splatting) t
 
 3DGRUT Playground RealTime Viewport:
 
+![3DGRUT Playground Garden](Images/NVIDIA_3dgrut_playground_garden.png)
+
 ![3DGRUT Playground Bunny](Images/NVIDIA_3dgrut_playground_with_wavefront_obj_bunny.png)
 
 ![3DGRUT Playground Lego](Images/NVIDIA_3dgrut_playground_lego.png)
-
-![3DGRUT Playground Garden](Images/NVIDIA_3dgrut_playground_garden.png)
 
 ## Setup the Conda environment on MintOS Linux
 
