@@ -89,11 +89,32 @@ The "path=" entry defines the relative path to the source folder where the image
 
 The "out_dir=" entry is the relative path to the folder where the model output is saved. Inside this folder is a sub-directory that is defined by the "experiment_name=" entry.
 
-If you run low on GPU VRAM the CLI flag "dataset.downsample_factor=2" should be able to help you tune the memory usage.
-
-The trained output is saved to the folder:
+For example, if the "out_dir=runs" and "experiment_name=bonsai_3dgut" CLI parameters are used, then the trained output is saved to the folder:
 
 	$HOME/3dgrut/runs/bonsai_3dgut/
+
+If you run low on GPU VRAM the CLI flag "dataset.downsample_factor=2" should be able to help you tune the memory usage. This attribute lets you hop between the a Colmap trained dataset's pre-computed "images_#" folders. These folders hold proxy pre-scaled resolution versions of your source footage. You can select which footage folder you want to use on a training task by adjusting the "dataset.downsample_factor=#" CLI parameter:
+
+- specifying nothing uses the full resolution images in the "<colmap project>/images/" folder
+- dataset.downsample_factor=2 uses the half resolution images in the "<colmap project>/images_2/" folder
+- dataset.downsample_factor=4 uses the quarter resolution images in the  "<colmap project>/images_4/" folder
+- dataset.downsample_factor=8 uses the eighth resolution images in the "<colmap project>/images_8/" folder
+
+Example Colmap project folder hierarchy:
+
+    project/images/
+    project/images_2/
+    project/images_4/
+    project/images_8/
+    project/masks/
+    project/project.ini
+    project/database.db
+    project/sparse/0/cameras.bin
+    project/sparse/0/cameras.txt
+    project/sparse/0/images.bin
+    project/sparse/0/images.txt
+    project/sparse/0/points3d.bin
+    project/sparse/0/points3d.txt
 
 ## View the pre-trained scene using Playground
 
