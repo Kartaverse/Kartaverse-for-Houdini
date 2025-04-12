@@ -12,7 +12,6 @@ If you are interested in volumetric rendering and 3DGS (3D Gaussian Splatting) t
 
 ![3DGRUT Train](Images/NVIDIA_3dgrut_training.png)
 
-
 3DGRUT Playground RealTime Viewport:
 
 ![3DGRUT Playground Bunny](Images/NVIDIA_3dgrut_playground_with_wavefront_obj_bunny.png)
@@ -81,6 +80,16 @@ Here is the syntax to train a 3D Gaussian Raytracing model. In this case we are 
 	conda activate Kartaverse
 	cd $HOME/3dgrut/
 	python train.py --config-name apps/colmap_3dgut.yaml path=data/bonsai out_dir=runs experiment_name=bonsai_3dgut dataset.downsample_factor=2
+
+Decoding the above shell commands:
+
+The "--config-name" entry allows you to specify a YAML file that is found in the folder "$HOME/3dgrut/config/apps/". There are 3dgrt and 3dgut presets that are optimized for colmap, nerf_synthetic, and scannetpp datasets.
+
+The "path=" entry defines the relative path to the source folder where the image data and camera pose information is loaded from.
+
+The "out_dir=" entry is the relative path to the folder where the model output is saved. Inside this folder is a sub-directory that is defined by the "experiment_name=" entry.
+
+If you run low on GPU VRAM the CLI flag "dataset.downsample_factor=2" should be able to help you tune the memory usage.
 
 The trained output is saved to the folder:
 
