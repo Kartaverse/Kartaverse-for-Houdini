@@ -9,6 +9,7 @@
 		- [TOPs Workflow](fusion/tops_workflow)
 		- [Running Fusion Actions](fusion/running_fusion_actions)
 	- 3DGS Workflows
+		- [NVIDIA 3D Gaussian Raytracing](3dgrut/3dgrut)
 		- [Jawset Postshot 3DGS Automation](postshot)
 	- Volumetric Video Workflows
 		- [Overview](volumetric_video/overview)
