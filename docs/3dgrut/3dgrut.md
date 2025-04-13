@@ -452,10 +452,10 @@ The "version" file holds a number like "3".
 
 The "data.pkl" is encoded in the Python Pickle serialization format.
 
-If you want to look under the hook at the NVIDIA 3dgrut Python source code that interfaces with the "cameras.npy" file import/export tasks, open up the following files:
+If you want to look "under the hood" at the NVIDIA 3dgrut Python source code that interfaces with the "cameras.npy" file import/export tasks, open up the following files:
 
-    $HOME/3dgrut/threedgrut_playground/utils/video_out.py
-    $HOME/3dgrut/threedgrut_playground/ps_gui.py
+- $HOME/3dgrut/threedgrut_playground/utils/[video_out.py](https://github.com/nv-tlabs/3dgrut/blob/d4af752efdd190c3540ba9a9a8f6392e9057d2e7/threedgrut_playground/utils/video_out.py#L44)
+- $HOME/3dgrut/threedgrut_playground/[ps_gui.py](https://github.com/nv-tlabs/3dgrut/blob/d4af752efdd190c3540ba9a9a8f6392e9057d2e7/threedgrut_playground/ps_gui.py#L845)
 
 ## Troubleshooting
 
