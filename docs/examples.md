@@ -6,6 +6,14 @@ As always, more learning content is on the way! If you have something specific i
 
 ## GitHub Repo Hosted Examples:
 
+### /HoudiniProjects/TOPs_3DGRUT/
+
+- TOPS_3DGRUT_Static_V001.hip
+
+### /HoudiniProjects/TOPS_AppleCompressor/
+
+- TOPS_AppleCompressor_Image_Sequence_to_Movie_V001.hip
+
 ### /HoudiniProjects/TOPS_FusionStudio/
 
 - TOPS_FusionStudio_Fusion_Render_Node_V001.hip
