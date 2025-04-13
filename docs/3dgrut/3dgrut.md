@@ -303,7 +303,11 @@ Click on the orange colored triangle button in the tasks toolbar to start cookin
 
 ![Houdini Train](Images/tops_3dgrut_static_4_opcook.png)
 
-The results of this opcook workflow can be seen in the node graph, and in the "Task Graph Table" panel. Double-click on the Task Graph Table's "train_genericgenerator1" entry to display the cooking status in more detail.
+The results of this opcook workflow can be seen in the node graph, and in the "Task Graph Table" panel. Click on the solid green circle inside the GenericGenerator node shape to view this task's info.
+
+![Houdini Train](Images/tops_3dgrut_static_4_green_circle.png)
+
+At this point, you can double-click on the Task Graph Table's "train_genericgenerator1" entry to display the cooking status in more detail.
 
 ![Houdini Train](Images/tops_3dgrut_static_4_taskgraph.png)
 
