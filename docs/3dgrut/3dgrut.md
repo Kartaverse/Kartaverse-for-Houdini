@@ -260,7 +260,7 @@ If you are using Miniconda, a new terminal session can be started up using:
 
 "MINICONDA_ENV" is the folder path where your active Anaconda Miniconda virtual environment exists. This is typically a location inside your current user account's home folder like "$HOME/miniconda3/envs/Kartaverse/".
 
-"WORKING_DIR" is the folder path where the 3dgrut Github repo contents are saved locally. On a single user workstation this is typically a folder like "$HOME/3dgrut/".
+"WORKING_DIR" is the folder path where the 3dgrut Github repo contents are saved locally. On a single-user workstation this is typically a folder like "$HOME/3dgrut/".
 
 "SCRIPT_NAME" is the 3dgrut provided "train.py" script filename.
 
@@ -268,11 +268,11 @@ If you are using Miniconda, a new terminal session can be started up using:
 
 "SOURCE_DIR" is where your multi-view camera array source images are located. This could be a path like "$HIP/images/0001". No trailing slash needed.
 
-"OUTPUT_DIR" is where the training run output date is saved. This could be a path like "$HIP/geo". No trailing slash needed.
+"OUTPUT_DIR" is the folder location where the training run output is saved. This could be a path with an environment variable included like "$HIP/geo". No trailing slash needed.
 
-"EXPERIMENT_NAME" is the sub-folder name for the current project. This folder will be created inside the OUTPUT_DIR folder. The trained model checkpoint file is saved inside this folder and it will typically have several other filename elements appended to the folder name when generated.
+"EXPERIMENT_NAME" the name for the current project. This variable becomes the name for a sub-folder that is created with inside the OUTPUT_DIR folder. The trained model checkpoint file is saved inside this folder and it will typically have several other filename elements appended to the folder name when generated like "0001-1304_095251.
 
-"PROXY_RESOLUTION" allows you to specify if a reduced resolution set of images should be used. To use the original images you can clear out this attribute's value field. If you run low on GPU VRAM the CLI flag "dataset.downsample_factor=2" should be able to help you tune the memory usage. This attribute lets you hop between a COLMAP trained dataset's pre-computed "images_#" folders. These folders hold proxy pre-scaled resolution versions of your source footage. You can select which footage folder you want to use on a training task by adjusting the "dataset.downsample_factor=#" CLI parameter:
+"PROXY_RESOLUTION" allows you to specify if a reduced resolution set of source images should be used. To work with the original images you can clear out this attribute's value field. If your training job is constantly running low on GPU VRAM, the CLI flag "dataset.downsample_factor=2" should be able to help you tune the memory usage. This attribute lets you hop between a COLMAP trained dataset's pre-computed "images_#" folders. These folders hold proxy pre-scaled resolution versions of all your source footage. You can select which footage folder you want to use on a training task by adjusting the "dataset.downsample_factor=#" CLI parameter:
 
     specifying nothing uses the full resolution images in the "/images/" folder
     dataset.downsample_factor=2 uses the half resolution images in the "/images_2/" folder
@@ -283,7 +283,7 @@ If you are using Miniconda, a new terminal session can be started up using:
 
 ![Houdini Train](Images/tops_3dgrut_static_2_env_vars.png)
 
-The EnvironmentEdit node is used to customize the PYTHONHOME and PYTHONPATH environment variables. This helps redefine the Python version and site-packages used by 3dgrut.
+The EnvironmentEdit node is used to customize the PYTHONHOME and PYTHONPATH environment variables. This helps redefine the Python version and site-packages used by 3dgrut so it is compatible with a virtual environment like Conda or Miniconda.
 
     PYTHONHOME = `@MINICONDA_ENV`
     PYTHONPATH = `@MINICONDA_ENV`/lib/python3.11/site-packages
@@ -292,17 +292,17 @@ The EnvironmentEdit node is used to customize the PYTHONHOME and PYTHONPATH envi
 
 ![Houdini Train](Images/tops_3dgrut_static_3_generator.png)
 
-The GenericGenerator node runs the command-line job task. The custom variables we defined in the Attribute Create create node are referenced when building out the command-line flags that are passed to Python3 and the train.py script:
+The GenericGenerator node runs the command-line job task. The custom variables we defined in the Attribute Create nodde are referenced when building out the command-line flags that are passed to Python3 and the train.py script:
 
     "`@MINICONDA_ENV`/bin/python3" "`@WORKING_DIR`/`@SCRIPT_NAME`" --config-name "`@CONFIG_NAME`" path="`@SOURCE_DIR`" out_dir="`@OUTPUT_DIR`" experiment_name="`@EXPERIMENT_NAME`" `@PROXY_RESOLUTION`
 
 ### Running your first TOPs job
 
-Click on the orange colored triangle button in the tasks toolbar to start cooking the Houdini TOPs work item. This will start the batch rendering job. 
+Click on the orange colored triangle button in the Tasks toolbar to start cooking the Houdini TOPs work items. This will start the batch rendering job. 
 
 ![Houdini Train](Images/tops_3dgrut_static_4_opcook.png)
 
-The results of this opcook workflow can be seen in the node graph, and in the "Task Graph Table" panel. Click on the solid green circle inside the GenericGenerator node shape to view this task's info.
+The results of the opcook operation can be seen in the node graph, and in the "Task Graph Table" panel. Click on the solid green circle inside the GenericGenerator node shape to view this work item's Task info.
 
 ![Houdini Train](Images/tops_3dgrut_static_4_green_circle.png)
 
@@ -310,7 +310,7 @@ At this point, you can double-click on the Task Graph Table's "train_genericgene
 
 ![Houdini Train](Images/tops_3dgrut_static_4_taskgraph.png)
 
-As your GPU fans spin up under load from the 3DGRUT training task, you will see the progress messages scroll by in the status window. The rendering process will take a while so be patient!
+As your GPU fans spin up under the compute load from the 3D Gaussain Raytracing training task, you will see the pages of progress messages scroll by in the status window. The rendering process will take a while so please be patient!
 
 ![Houdini Train](Images/tops_3dgrut_static_5_status.png)
 
@@ -320,21 +320,23 @@ When the training job is done you can close the status window. Take a moment to 
 
 ![Houdini Train](Images/tops_3dgrut_static_4_cooked_nodes.png)
 
-You've now used Houdini TOPs to process your first dataset!
+You've now used Houdini TOPs to process your first 3DGRUT dataset!
 
 ### Create your own Playground Trajectory Videos
 
-The "Record Trajectory Video" controls in Playground allow you to create your own camera path based animations.
+Now that we have a fully trained model, let's create a 3D Gaussian Raytracing video clip. The "Record Trajectory Video" controls in the Playground application is used to create camera path based animations.
 
-The Playground interactive viewport session saves your custom cameras views and the fly-through trajectory data to a file named "cameras.npy" that is saved in the current working directory. This document is useful for 4D Gaussian Raytracing workflows as it allows you import/export the flythrough animation data.
+The Playground interactive viewport session saves your custom cameras views and the fly-through trajectory data to a file named "cameras.npy". This document is saved to the current working directory.
 
-When you are ready, pressing the "Render Video" button will output a high quality video to disk using the filename specified in the "Video Output Path" textfield. The default filename is "output.mp4".
+The cameras.npy document is useful for 4D Gaussian Raytracing workflows as it allows you import/export the flythrough animation data, so you can use it with external DCC apps and custom Python scripts.
+
+After you have created several cameras and are  ready to see the results, press the "Render Video" button. This will tell the Playground app to generate and save a high quality video to disk using the filename specified in the "Video Output Path" textfield. The default filename for the rendering is "output.mp4".
 
 ![Playground Trajectory](Images/3dgrut_playground_trajectory.png)
 
-The "cameras.npy" file stores camera extrinsic, intrinsic, lens model, and transform matrix data in a [Python Pickle](https://docs.python.org/3/library/pickle.html#module-pickle) serialized format that is used by [PyTorch](https://pytorch.org/docs/stable/index.html) and the [NVIDIA Kaolin library](https://kaolin.readthedocs.io/en/latest/modules/kaolin.render.camera.camera_extrinsics.html). 
+The "cameras.npy" file stores camera extrinsic, intrinsic, lens model, and transform matrix data in a [Python Pickle](https://docs.python.org/3/library/pickle.html#module-pickle) serialized format that is compatible with [PyTorch](https://pytorch.org/docs/stable/index.html) and the [NVIDIA Kaolin library](https://kaolin.readthedocs.io/en/latest/modules/kaolin.render.camera.camera_extrinsics.html). 
 
-If you want to look inside a 3dgrut exported cameras.npy file, you can do it with the following Python 3 code:
+If you want to look inside a 3dgrut exported cameras.npy file, you can do so with the following Python 3 code:
 
     import os
     import torch
@@ -345,7 +347,7 @@ If you want to look inside a 3dgrut exported cameras.npy file, you can do it wit
     
     print(trajectory)
 
-This results in the following terminal output:
+Running the code snippet in Python3 will result in the following terminal output:
     
     Warp 1.2.1 initialized:
        CUDA Toolkit 11.8, Driver 12.2
@@ -459,7 +461,7 @@ If you want to look under the hook at the NVIDIA 3dgrut Python source code that 
 
 ### CUDA Memory Errors
 
-If you see the following memory error in the training log output:
+When training a new scene that includes high resolution media, you might see the following memory error in the training log output:
 
     torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 4.29 GiB. GPU 0 has a total capacty of 23.67 GiB 
     of which 2.98 GiB is free. Including non-PyTorch memory, this process has 20.47 GiB memory in use. Of the allocated 
