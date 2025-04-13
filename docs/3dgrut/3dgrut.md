@@ -47,7 +47,7 @@ The following commands can be entered in a new terminal session to install Conda
 
 ## Setup 3DGRUT Playground
 
-After you have the NVIDIA 3DGRUT libraries installed, you can add the 3DGRUT interactive viewport called playground to your system:
+After you have the NVIDIA 3DGRUT libraries installed, you can add the 3DGRUT interactive viewport called Playground to your system:
 
 	conda activate Kartaverse
 	cd $HOME/3dgrut/
@@ -93,14 +93,14 @@ For example, if the "out_dir=runs" and "experiment_name=bonsai_3dgut" CLI parame
 
 	$HOME/3dgrut/runs/bonsai_3dgut/
 
-If you run low on GPU VRAM the CLI flag "dataset.downsample_factor=2" should be able to help you tune the memory usage. This attribute lets you hop between the a Colmap trained dataset's pre-computed "images_#" folders. These folders hold proxy pre-scaled resolution versions of your source footage. You can select which footage folder you want to use on a training task by adjusting the "dataset.downsample_factor=#" CLI parameter:
+If you run low on GPU VRAM the CLI flag "dataset.downsample_factor=2" should be able to help you tune the memory usage. This attribute lets you hop between the a COLMAP trained dataset's pre-computed "images_#" folders. These folders hold proxy pre-scaled resolution versions of your source footage. You can select which footage folder you want to use on a training task by adjusting the "dataset.downsample_factor=#" CLI parameter:
 
 - specifying nothing uses the full resolution images in the "<colmap project>/images/" folder
 - dataset.downsample_factor=2 uses the half resolution images in the "<colmap project>/images_2/" folder
 - dataset.downsample_factor=4 uses the quarter resolution images in the  "<colmap project>/images_4/" folder
 - dataset.downsample_factor=8 uses the eighth resolution images in the "<colmap project>/images_8/" folder
 
-Example Colmap project folder hierarchy:
+Example COLMAP project folder hierarchy:
 
     project/images/
     project/images_2/
