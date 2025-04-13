@@ -134,7 +134,7 @@ The 3DGRUT Train CLI Parameters can be listed in the terminal using:
 
     conda activate Kartaverse
     cd $HOME/3dgrut/
-    python train.py --h
+    python train.py --help
 
 The output is:
 
@@ -204,7 +204,7 @@ The 3DGRUT Playground CLI Parameters can be listed in the terminal using:
 
     conda activate Kartaverse
     cd $HOME/3dgrut/
-    python playground.py --h
+    python playground.py --help
 
 The output is:
 
@@ -222,7 +222,6 @@ The output is:
       --buffer_mode {host2device,device2device}
                             Buffering mode for passing rendered data from CUDA to OpenGL screen buffer.Using device2device
                             is recommended.
-
 
 
 ## Houdini TOPs (Task Operator) Workflows
