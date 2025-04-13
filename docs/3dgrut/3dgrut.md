@@ -345,7 +345,7 @@ When you are ready, pressing the "Render Video" button will output a high qualit
 
 ![Playground Trajectory](Images/3dgrut_playground_trajectory.png)
 
-The "cameras.npy" file stores camera extrinsic, intrinsic, lens model, and transform matrix data in a [Python Pickle](https://docs.python.org/3/library/pickle.html#module-pickle) serialized format that is used by PyTorch and the [NVIDIA Kaolin library](https://kaolin.readthedocs.io/en/latest/modules/kaolin.render.camera.camera_extrinsics.html). 
+The "cameras.npy" file stores camera extrinsic, intrinsic, lens model, and transform matrix data in a [Python Pickle](https://docs.python.org/3/library/pickle.html#module-pickle) serialized format that is used by [PyTorch](https://pytorch.org/docs/stable/index.html) and the [NVIDIA Kaolin library](https://kaolin.readthedocs.io/en/latest/modules/kaolin.render.camera.camera_extrinsics.html). 
 
 If you want to look inside a 3dgrut exported cameras.npy file, you can do it with the following Python 3 code:
 
