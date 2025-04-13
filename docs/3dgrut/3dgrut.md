@@ -124,10 +124,110 @@ Once a trained scene has been created, we can load this dataset into a Playgroun
 	cd $HOME/3dgrut/
 	python playground.py --gs_object $HOME/3dgrut/runs/bonsai_3dgut/bonsai-1104_201100/ckpt_last.pt
 
+## 3DGRUT Command-Line Flags
+
+If you want to start automating things with custom shell scripts it's handy to know what options exist in the 3DGRUT toolset.
+
+### Train CLI Flags
+
+The 3DGRUT Train CLI Parameters can be listed in the terminal using:
+
+    conda activate Kartaverse
+    cd $HOME/3dgrut/
+    python train.py --h
+
+The output is:
+
+    usage: train.py [--help] [--hydra-help] [--version] [--cfg {job,hydra,all}] [--resolve] [--package PACKAGE] [--run]
+                    [--multirun] [--shell-completion] [--config-path CONFIG_PATH] [--config-name CONFIG_NAME]
+                    [--config-dir CONFIG_DIR] [--experimental-rerun EXPERIMENTAL_RERUN]
+                    [--info [{all,config,defaults,defaults-tree,plugins,searchpath}]]
+                    [overrides ...]
+    
+    python train.py --hydra-help
+    Hydra (1.3.2)
+    See https://hydra.cc for more info.
+    
+    == Flags ==
+    --help,-h : Application's help
+    --hydra-help : Hydra's help
+    --version : Show Hydra's version and exit
+    --cfg,-c : Show config instead of running [job|hydra|all]
+    --resolve : Used in conjunction with --cfg, resolve config interpolations before printing.
+    --package,-p : Config package to show
+    --run,-r : Run a job
+    --multirun,-m : Run multiple jobs with the configured launcher and sweeper
+    --shell-completion,-sc : Install or Uninstall shell completion:
+        Bash - Install:
+        eval "$(python train.py -sc install=bash)"
+        Bash - Uninstall:
+        eval "$(python train.py -sc uninstall=bash)"
+    
+        Fish - Install:
+        python train.py -sc install=fish | source
+        Fish - Uninstall:
+        python train.py -sc uninstall=fish | source
+    
+        Zsh - Install:
+        Zsh is compatible with the Bash shell completion, see the [documentation](https://hydra.cc/docs/1.2/tutorials/basic/running_your_app/tab_completion#zsh-instructions) for details.
+        eval "$(python train.py -sc install=bash)"
+        Zsh - Uninstall:
+        eval "$(python train.py -sc uninstall=bash)"
+    
+    --config-path,-cp : Overrides the config_path specified in hydra.main().
+                        The config_path is absolute or relative to the Python file declaring @hydra.main()
+    --config-name,-cn : Overrides the config_name specified in hydra.main()
+    --config-dir,-cd : Adds an additional config dir to the config search path
+    --experimental-rerun : Rerun a job from a previous config pickle
+    --info,-i : Print Hydra information [all|config|defaults|defaults-tree|plugins|searchpath]
+    Overrides : Any key=value arguments to override config values (use dots for.nested=overrides)
+    
+    == Configuration groups ==
+    Compose your configuration from those groups (For example, append hydra/job_logging=disabled to command line)
+    
+    hydra: config
+    hydra/env: default
+    hydra/help: default
+    hydra/hydra_help: default
+    hydra/hydra_logging: default, disabled, hydra_debug, none
+    hydra/job_logging: default, disabled, none, stdout
+    hydra/launcher: basic
+    hydra/output: default
+    hydra/sweeper: basic
+    
+    
+    Use '--cfg hydra' to Show the Hydra config.
+
+### Playground CLI Flags
+
+The 3DGRUT Playground CLI Parameters can be listed in the terminal using:
+
+    conda activate Kartaverse
+    cd $HOME/3dgrut/
+    python playground.py --h
+
+The output is:
+
+    usage: playground.py [-h] --gs_object GS_OBJECT [--mesh_assets MESH_ASSETS] [--default_gs_config DEFAULT_GS_CONFIG]
+                         [--buffer_mode {host2device,device2device}]
+    
+    options:
+      -h, --help            show this help message and exit
+      --gs_object GS_OBJECT
+                            Path of pretrained 3dgrt checkpoint, as .pt / .ingp / .ply file.
+      --mesh_assets MESH_ASSETS
+                            Path to folder containing mesh assets of .obj or .glb format.
+      --default_gs_config DEFAULT_GS_CONFIG
+                            Name of default config to use for .ingp, .ply files, or .pt files not trained with 3dgrt.
+      --buffer_mode {host2device,device2device}
+                            Buffering mode for passing rendered data from CUDA to OpenGL screen buffer.Using device2device
+                            is recommended.
+
+
 
 ## Houdini TOPs (Task Operator) Workflows
 
-The next step is to hop into the deep end and explore 4D Gaussian Raytracing workflows. To do this we need to add a layer of workflow automation to the mix. We are going to do this with help of SideFX Houdini TOPs (task operators) nodes. 
+The next step is to hop into the deep end and explore 4D Gaussian Raytracing workflows. To do this we need to add a layer of workflow automation to the mix. We are going to do this with help of SideFX [Houdini TOPs](https://www.sidefx.com/docs/houdini/tops/index.html) (task operators) nodes. 
 
 This approach makes it possible to create modular, reusable, node-graphs that control NVIDIA's 3DGRUT library using the command-line. The end goal is to create a fully templated system that can train a single static scene. The same nodes can be expanded to create a flexible 4D Gaussian Raytracing "video-grammetry" pipeline that can be run locally or in the cloud.
 
