@@ -1,6 +1,6 @@
 # Kartaverse Workflows | Gaussian Raytracing on Linux
 
-If you are interested in volumetric rendering and 3DGS (3D Gaussian Splatting) technology, NVIDIA has released a 3D Gaussian Raytracing library for Linux that provides model training and interactive rendering support. The software is available from the [3DGRUT GitHub](https://github.com/nv-tlabs/3dgrut) repository with a permissive Apache 2.0 open-source license.
+If you are interested in volumetric rendering and 3DGS (3D Gaussian Splatting) technology, NVIDIA has released a 3D Gaussian Raytracing library for Linux that provides model training and interactive rendering support. The software is available from the [3DGRUT GitHub](https://github.com/nv-tlabs/3dgrut) repository with a permissive [Apache 2.0](https://github.com/nv-tlabs/3dgrut/blob/main/LICENSE) open-source license.
 
 ## Gaussian Raytracing Screenshots
 
@@ -322,19 +322,6 @@ When the training job is done you can close the status window. Take a moment to 
 
 You've now used Houdini TOPs to process your first dataset!
 
-### CUDA Memory Errors
-
-If you see the following memory error in the training log output:
-
-    torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 4.29 GiB. GPU 0 has a total capacty of 23.67 GiB 
-    of which 2.98 GiB is free. Including non-PyTorch memory, this process has 20.47 GiB memory in use. Of the allocated 
-    memory 17.21 GiB is allocated by PyTorch, and 2.29 GiB is reserved by PyTorch but unallocated. If reserved but 
-    unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory 
-    Management and PYTORCH_CUDA_ALLOC_CONF
-
-It is a good indication that you should explore the "PROXY_RESOLUTION" attribute and use it to select a lower resolution image folder. This is where the "dataset.downsample_factor" tip comes to play.
-
-
 ### Create your own Playground Trajectory Videos
 
 The "Record Trajectory Video" controls in Playground allow you to create your own camera path based animations.
@@ -468,3 +455,16 @@ If you want to look under the hook at the NVIDIA 3dgrut Python source code that 
     $HOME/3dgrut/threedgrut_playground/utils/video_out.py
     $HOME/3dgrut/threedgrut_playground/ps_gui.py
 
+## Troubleshooting
+
+### CUDA Memory Errors
+
+If you see the following memory error in the training log output:
+
+    torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 4.29 GiB. GPU 0 has a total capacty of 23.67 GiB 
+    of which 2.98 GiB is free. Including non-PyTorch memory, this process has 20.47 GiB memory in use. Of the allocated 
+    memory 17.21 GiB is allocated by PyTorch, and 2.29 GiB is reserved by PyTorch but unallocated. If reserved but 
+    unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory 
+    Management and PYTORCH_CUDA_ALLOC_CONF
+
+It is a good indication that you should explore the "PROXY_RESOLUTION" attribute and use it to select a lower resolution image folder. This is where the "dataset.downsample_factor" tip comes to play.
