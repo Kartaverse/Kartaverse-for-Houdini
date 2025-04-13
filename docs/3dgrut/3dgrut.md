@@ -333,3 +333,138 @@ If you see the following memory error in the training log output:
     Management and PYTORCH_CUDA_ALLOC_CONF
 
 It is a good indication that you should explore the "PROXY_RESOLUTION" attribute and use it to select a lower resolution image folder. This is where the "dataset.downsample_factor" tip comes to play.
+
+
+### Create your own Playground Trajectory Videos
+
+The "Record Trajectory Video" controls in Playground allow you to create your own camera path based animations.
+
+The Playground interactive viewport session saves your custom cameras views and the fly-through trajectory data to a file named "cameras.npy" that is saved in the current working directory. This document is useful for 4D Gaussian Raytracing workflows as it allows you import/export the flythrough animation data.
+
+When you are ready, pressing the "Render Video" button will output a high quality video to disk using the filename specified in the "Video Output Path" textfield. The default filename is "output.mp4".
+
+![Playground Trajectory](Images/3dgrut_playground_trajectory.png)
+
+The "cameras.npy" file stores camera extrinsic, intrinsic, lens model, and transform matrix data in a [Python Pickle](https://docs.python.org/3/library/pickle.html#module-pickle) serialized format that is used by PyTorch and the [NVIDIA Kaolin library](https://kaolin.readthedocs.io/en/latest/modules/kaolin.render.camera.camera_extrinsics.html). 
+
+If you want to look inside a 3dgrut exported cameras.npy file, you can do it with the following Python 3 code:
+
+    import os
+    import torch
+    
+    filepath = os.path.expandvars('$HOME/3dgrut/cameras.npy')
+    with open(filepath, 'rb') as file:
+        trajectory = torch.load(file)
+    
+    print(trajectory)
+
+This results in the following terminal output:
+    
+    Warp 1.2.1 initialized:
+       CUDA Toolkit 11.8, Driver 12.2
+       Devices:
+         "cpu"      : "x86_64"
+         "cuda:0"   : "NVIDIA GeForce RTX 3090" (24 GiB, sm_86, mempool enabled)
+       Kernel cache:
+         /home/vfx/.cache/warp/1.2.1
+    [CameraExtrinsics of 1 cameras, device: cpu, dtype: torch.float64, backend: _MatrixSE3Rep.
+    Coordinates basis: 
+    tensor([[1., 0., 0.],
+            [0., 1., 0.],
+            [0., 0., 1.]], dtype=torch.float64).
+    Extrinsic params: tensor([[ 0.9974, -0.0623, -0.0358, -0.3650, -0.0706, -0.9411, -0.3308,  2.0150,
+             -0.0131,  0.3325, -0.9430, -4.4033,  0.0000,  0.0000,  0.0000,  1.0000]],
+           dtype=torch.float64)
+    
+    PinholeIntrinsics of 1920x1080, params: tensor([[   0.0000,    0.0000, 1303.6753, 1303.6753]], dtype=torch.float64), CameraExtrinsics of 1 cameras, device: cpu, dtype: torch.float64, backend: _MatrixSE3Rep.
+    Coordinates basis: 
+    tensor([[1., 0., 0.],
+            [0., 1., 0.],
+            [0., 0., 1.]], dtype=torch.float64).
+    Extrinsic params: tensor([[ 0.7974, -0.2360,  0.5555, -0.3650, -0.0275, -0.9336, -0.3571,  2.0150,
+              0.6029,  0.2695, -0.7509, -4.4033,  0.0000,  0.0000,  0.0000,  1.0000]],
+           dtype=torch.float64)
+    
+    PinholeIntrinsics of 1920x1080, params: tensor([[   0.0000,    0.0000, 1303.6753, 1303.6753]], dtype=torch.float64), CameraExtrinsics of 1 cameras, device: cpu, dtype: torch.float64, backend: _MatrixSE3Rep.
+    Coordinates basis: 
+    tensor([[1., 0., 0.],
+            [0., 1., 0.],
+            [0., 0., 1.]], dtype=torch.float64).
+    Extrinsic params: tensor([[ 3.0924e-03, -3.6550e-01,  9.3081e-01, -3.6500e-01, -1.7792e-01,
+             -9.1616e-01, -3.5916e-01,  2.0150e+00,  9.8404e-01, -1.6449e-01,
+             -6.7862e-02, -4.4033e+00,  0.0000e+00,  0.0000e+00,  0.0000e+00,
+              1.0000e+00]], dtype=torch.float64)
+    
+    PinholeIntrinsics of 1920x1080, params: tensor([[   0.0000,    0.0000, 1303.6753, 1303.6753]], dtype=torch.float64), CameraExtrinsics of 1 cameras, device: cpu, dtype: torch.float64, backend: _MatrixSE3Rep.
+    Coordinates basis: 
+    tensor([[1., 0., 0.],
+            [0., 1., 0.],
+            [0., 0., 1.]], dtype=torch.float64).
+    Extrinsic params: tensor([[-0.5516, -0.0147,  0.8340, -1.3191, -0.4910, -0.8025, -0.3390,  2.0250,
+              0.6742, -0.5965,  0.4355, -4.6033,  0.0000,  0.0000,  0.0000,  1.0000]],
+           dtype=torch.float64)
+    
+    PinholeIntrinsics of 1920x1080, params: tensor([[   0.0000,    0.0000, 1303.6753, 1303.6753]], dtype=torch.float64), CameraExtrinsics of 1 cameras, device: cpu, dtype: torch.float64, backend: _MatrixSE3Rep.
+    Coordinates basis: 
+    tensor([[1., 0., 0.],
+            [0., 1., 0.],
+            [0., 0., 1.]], dtype=torch.float64).
+    Extrinsic params: tensor([[-0.8025,  0.5171,  0.2978, -1.3191, -0.5849, -0.5828, -0.5642,  2.0250,
+             -0.1182, -0.6269,  0.7701, -4.6033,  0.0000,  0.0000,  0.0000,  1.0000]],
+           dtype=torch.float64)
+    
+    PinholeIntrinsics of 1920x1080, params: tensor([[   0.0000,    0.0000, 1303.6753, 1303.6753]], dtype=torch.float64), CameraExtrinsics of 1 cameras, device: cpu, dtype: torch.float64, backend: _MatrixSE3Rep.
+    Coordinates basis: 
+    tensor([[1., 0., 0.],
+            [0., 1., 0.],
+            [0., 0., 1.]], dtype=torch.float64).
+    Extrinsic params: tensor([[-0.3775,  0.9128, -0.1561, -1.3191, -0.3833, -0.3074, -0.8710,  2.0250,
+             -0.8430, -0.2689,  0.4659, -4.6033,  0.0000,  0.0000,  0.0000,  1.0000]],
+           dtype=torch.float64)
+    
+    PinholeIntrinsics of 1920x1080, params: tensor([[   0.0000,    0.0000, 1303.6753, 1303.6753]], dtype=torch.float64), CameraExtrinsics of 1 cameras, device: cpu, dtype: torch.float64, backend: _MatrixSE3Rep.
+    Coordinates basis: 
+    tensor([[1., 0., 0.],
+            [0., 1., 0.],
+            [0., 0., 1.]], dtype=torch.float64).
+    Extrinsic params: tensor([[ 0.1962,  0.9326, -0.3030, -1.3191, -0.1887, -0.2673, -0.9450,  2.0250,
+             -0.9622,  0.2425,  0.1235, -4.6033,  0.0000,  0.0000,  0.0000,  1.0000]],
+           dtype=torch.float64)
+    
+    PinholeIntrinsics of 1920x1080, params: tensor([[   0.0000,    0.0000, 1303.6753, 1303.6753]], dtype=torch.float64), CameraExtrinsics of 1 cameras, device: cpu, dtype: torch.float64, backend: _MatrixSE3Rep.
+    Coordinates basis: 
+    tensor([[1., 0., 0.],
+            [0., 1., 0.],
+            [0., 0., 1.]], dtype=torch.float64).
+    Extrinsic params: tensor([[ 0.0761,  0.9776, -0.1961, -1.3191,  0.5719, -0.2039, -0.7946,  2.0250,
+             -0.8168, -0.0517, -0.5747, -4.6033,  0.0000,  0.0000,  0.0000,  1.0000]],
+           dtype=torch.float64)
+    
+    PinholeIntrinsics of 1920x1080, params: tensor([[   0.0000,    0.0000, 1303.6753, 1303.6753]], dtype=torch.float64)]
+
+### What's inside an NPY Zip archive?
+
+If you are curious and want to look deeper inside the npy file manually: The "cameras.npy" file is a zipped folder hierarchy. If you expand a cameras.npy based zip archive you will see a document structure like this:
+
+    byteorder
+    data/1
+    data/2
+    data/3
+    data/4
+    data/...
+    data.pkl
+    version
+
+The "data" folder holds numbered files with no file extension. Each file is encoded in the Python Pickle serialization format.
+
+The "byteorder" file holds a value like "little" to indicate the [endianness](https://en.wikipedia.org/wiki/Endianness) of the file.
+
+The "version" file holds a number like "3".
+
+The "data.pkl" is encoded in the Python Pickle serialization format.
+
+If you want to look under the hook at the NVIDIA 3dgrut Python source code that interfaces with the "cameras.npy" file import/export tasks, open up the following files:
+
+    $HOME/3dgrut/threedgrut_playground/utils/video_out.py
+    $HOME/3dgrut/threedgrut_playground/ps_gui.py
+
