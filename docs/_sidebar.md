@@ -11,6 +11,8 @@
 	- 3DGS Workflows
 		- [NVIDIA 3D Gaussian Raytracing](3dgrut/3dgrut)
 		- [Jawset Postshot 3DGS Automation](postshot)
+	- ComfyUI Automation
+		- [MatAnyone for ComfyUI](comfyui/MatAnyone)
 	- Volumetric Video Workflows
 		- [Overview](volumetric_video/overview)
 		- [Project Hierarchy](volumetric_video/project_hierarchy)
