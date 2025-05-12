@@ -131,7 +131,7 @@ The following webpages have useful resources for MatAnyone usage:
 	https://github.com/pq-yang/MatAnyone?tab=readme-ov-file#download-model
 	https://docs.comfy.org/essentials/core-concepts/models
 
-Wh have the option of using the ComfyUI Manager to streamline model installs. If you want to do the process manually:
+We have the option of using the ComfyUI Manager to streamline model installs. If you want to do the process manually:
 
 Download [matanyone.pth](https://github.com/pq-yang/MatAnyone/releases/download/v1.0.0/matanyone.pth) (138 MB) file.
 	
