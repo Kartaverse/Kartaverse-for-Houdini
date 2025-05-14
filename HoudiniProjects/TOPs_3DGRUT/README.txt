@@ -1,4 +1,4 @@
-Use NVIDIA 3DGRUT's library to train a  3D Gaussian Raytracing model from the command-line
+Use NVIDIA 3DGRUT's library to train a 3D Gaussian Raytracing model from the command-line
 
 This HIP file requires you to have launched Houdini/HQueue from inside a virtual environment session that has CUDA Toolkit, Python 3.11, and several other python packages pre-installed:
 
