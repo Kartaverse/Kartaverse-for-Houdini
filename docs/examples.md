@@ -18,6 +18,10 @@ As always, more learning content is on the way! If you have something specific i
 
 - TOPS_FusionStudio_Fusion_Render_Node_V001.hip
 
+### /HoudiniProjects/TOPS_MetashapePro/
+
+- TOPS_MetashapePro_Print_Methods_V001.hip
+
 ### /HoudiniProjects/TOPS_Panotools/
 
 - TOPs_PTS_to_Frameset_Folders_V001.hip
