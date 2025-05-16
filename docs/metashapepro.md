@@ -37,7 +37,7 @@ The "attribute create" node is used to customize the job parameters. These value
 C:\Python\
 ```
 
-2. Download the [Metashape Python Module](https://www.agisoft.com/downloads/installer/).
+2. Download the [Metashape Python module](https://www.agisoft.com/downloads/installer/).
 
 3. The Metashape Python Module is installed in the command prompt/terminal using:
 
