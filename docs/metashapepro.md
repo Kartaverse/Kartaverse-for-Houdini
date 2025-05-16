@@ -1,6 +1,6 @@
 # Metashape Pro Python Workflows
 
-The Agisoft [Metashape Pro](https://www.agisoft.com/features/professional-edition/) software supports for Python scripting through the use of a Metashape [Python module](https://www.agisoft.com/pdf/metashape_python_api_2_2_1.pdf). This allows for efficient Houdini TOPs based automation of 3DGS workflow tasks.
+The Agisoft [Metashape Pro](https://www.agisoft.com/features/professional-edition/) software supports Python scripting through the use of a Metashape [Python module](https://www.agisoft.com/pdf/metashape_python_api_2_2_1.pdf). This allows for efficient Houdini TOPs based automation of 3DGS workflow tasks. 
 
 There is a handy GitHub repository of [sample Metashape code](https://github.com/agisoft-llc/metashape-scripts/blob/master/src/samples/general_workflow.py) that is a great reference/learning resource when used alongside the Metashape Python API docs.
 
@@ -25,7 +25,7 @@ Metashape Pro can be used for automated 3D reconstructions:
 
 ![Metashape Pro 1](Images/metashapepro_runjob.png)
 
-The attribute create node is used to customize the job parameters. These values are passed to Metashape's python API via the pythonscript node.
+The "attribute create" node is used to customize the job parameters. These values are passed to Metashape's Python API via the "pythonscript" node.
 
 ![Metashape Pro 2](Images/metashapepro_attribute_create.png)
 
@@ -45,7 +45,7 @@ C:\Python\
 pip install Metashape-*.whl
 ```
 
-4. Update the Houdini TOPS based "pythonscript" node. We need to add some Python Code to the textfield to modify the "sys.path.insert()" entry. This will point Hython (Houdini Python) at the site-packages location where the Metashape python module is installed. The default location for the included .hip example is:
+4. Update the Houdini TOPS based "pythonscript" node. We need to add some Python code to the textfield to modify the "sys.path.insert()" entry. This will point Hython (Houdini Python) at the site-packages location where the Metashape Python module is installed. The default 3rd party site-packages location used by the included .hip example is:
 
 ```bash
 C:\Python\Lib\site-packages
