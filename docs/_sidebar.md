@@ -11,6 +11,7 @@
 	- 3DGS Workflows
 		- [NVIDIA 3D Gaussian Raytracing](3dgrut/3dgrut)
 		- [Jawset Postshot 3DGS Automation](postshot)
+		- [Agisoft Metashape Pro Python](metashapepro)
 	- ComfyUI Automation
 		- [MatAnyone for ComfyUI](comfyui/MatAnyone)
 		- [NormalCrafter for ComfyUI](comfyui/NormalCrafter)
