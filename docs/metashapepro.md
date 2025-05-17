@@ -45,6 +45,20 @@ C:\Python\
 pip install Metashape-*.whl
 ```
 
+You can see a report of where the Metashape site-package is installed using the command prompt/terminal window using:
+
+ ```bash
+pip list
+pip show Metashape
+
+```
+
+Result:
+
+    Location: C:\python\Lib\site-packages
+
+![PIP](Images/pip-site-package.png)
+
 4. Update the Houdini TOPS based "pythonscript" node. We need to add some Python code to the textfield to modify the "sys.path.insert()" entry. This will point Hython (Houdini Python) at the site-packages location where the Metashape Python module is installed. The default 3rd party site-packages location used by the included .hip example is:
 
 ```bash
