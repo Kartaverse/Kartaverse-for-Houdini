@@ -15,6 +15,8 @@
 	- ComfyUI Automation
 		- [MatAnyone for ComfyUI](comfyui/MatAnyone)
 		- [NormalCrafter for ComfyUI](comfyui/NormalCrafter)
+	- GUI Automation
+		- [PyAutoGUI](pyautogui)
 	- Volumetric Video Workflows
 		- [Overview](volumetric_video/overview)
 		- [Project Hierarchy](volumetric_video/project_hierarchy)
