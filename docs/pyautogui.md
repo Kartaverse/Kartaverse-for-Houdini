@@ -17,6 +17,7 @@ Example .hip files are provided to help you get started with PyAutoGUI  workflow
 ### /HoudiniProjects/TOPS_PyAutoGUI/
 
 - TOPs_PyAutoGUI_Demo1_V001.hip
+- TOPs_PyAutoGUI_Demo2_V001.hip
 
 ## Screenshots
 
@@ -101,4 +102,61 @@ print(dir(ui))
 
 ```
 
-![PyAutoGUI Result](Images/pyautogui_result.png)
+![PyAutoGUI Result 1](Images/pyautogui_result1.png)
+
+### TOPs_PyAutoGUI_Demo2.py
+
+```python
+# Using PyAutoGUI to automate "unscriptable workflows" via GUI automation
+# 1. For simplicity, install Python 3.11 to a custom location in the root folder like:
+# C:\Python\
+
+# 2. The PyAutoGUI Python Module is installed in the command prompt/terminal using:
+# pip install pyautogui
+
+# 3. Customize the attribtuecreate node's "PYTHON_SITE_PACKAGES" variable to point at your local
+# Python site-packages folder. This will point Hython (Houdini Python) at the site-packages 
+# location where the Python module is installed. The default 3rd party site-packages location 
+# used by the included .hip example is:
+# C:\Python\Lib\site-packages
+
+# 4. You can validate where PyAutoGUI was installed from the command prompt/terminal using:
+# pip list
+# pip show PyAutoGUI
+
+import sys, os, time
+import importlib
+
+# Update the System PATH to include the user installed Python site-package folder
+sitePackagesPath = str(work_item.data.stringData("PYTHON_SITE_PACKAGES", 0))
+sys.path.insert(0, sitePackagesPath)
+
+# Print the Python version
+# Example: 3.11.7 (main, Feb 22 2024, 17:21:30) [MSC v.1935 64 bit (AMD64)]
+# print(sys.version)
+
+# Import the PyAutoGUI Python module
+ui = importlib.import_module('pyautogui')
+
+# --------------------------------------
+# Start writing your code here:
+
+# Get the Screen Resolution
+screenWidth, screenHeight = ui.size()
+# print("[Monitor Dimensions] {0}x{1}px".format(screenWidth, screenHeight))
+
+# Launch the Windows calculator
+calcPath = "C:\Windows\SysWOW64\calc.exe"
+os.system('start "" "' + str(calcPath) + '"')
+
+# Wait a moment
+time.sleep(2)
+
+# Type in a number
+ui.write("5318008", interval = 0.25)
+ui.press("enter")
+
+```
+
+![PyAutoGUI Result 2](Images/pyautogui_result2.png)
+
