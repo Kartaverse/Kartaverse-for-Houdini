@@ -14,10 +14,10 @@ Example .hip files are provided to help you get started with Metashape Pro workf
 
 - TOPs_FFmpeg_Movies_to_Frameset_Images_V001.hip
 - TOPs_Frameset_Images_to_Image_Sequence_V001.hip
-- TOPS_MetashapePro_Print_Methods_V001.hip
-- TOPS_MetashapePro_RunJob_V001.hip
+- TOPs_MetashapePro_Print_Methods_V001.hip
+- TOPs_MetashapePro_RunJob_V001.hip
 
-To make full use of the "TOPS_MetashapePro_RunJob_V001.hip" Houdini .hip file, you should add a "psx" folder to your Houdini project folder hierarchy. This is used to store the newly created Metashape .psx project files, and the report PDFs.
+To make full use of the "TOPs_MetashapePro_RunJob_V001.hip" Houdini .hip file, you should add a "psx" folder to your Houdini project folder hierarchy. This is used to store the newly created Metashape .psx project files, and the report PDFs.
 
 ## Screenshots
 
@@ -69,9 +69,9 @@ C:\Python\Lib\site-packages
 
 6. Edit the attribute_create node values to customize the Metashape Project filename (PSX_PROJECT), the exported mesh filename (EXPORT_MODEL), and the exported point cloud name (EXPORT_POINT_CLOUD).
 
-## TOPS Based Pythonscript Code Snippets
+## TOPs Based Pythonscript Code Snippets
 
-The Houdini TOPS nodegraph supports the direct execution of Python code snippets with the [Pythonscript node](https://www.sidefx.com/docs/houdini/nodes/top/pythonscript.html). This relies on the Hython (Houdini Python) interpreter matching the version specifics of the Metashape Python module.
+The Houdini TOPs nodegraph supports the direct execution of Python code snippets with the [Pythonscript node](https://www.sidefx.com/docs/houdini/nodes/top/pythonscript.html). This relies on the Hython (Houdini Python) interpreter matching the version specifics of the Metashape Python module.
 
 ### MetashapePro_import_photos.py
 

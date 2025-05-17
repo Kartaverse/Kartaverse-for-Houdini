@@ -6,32 +6,36 @@ As always, more learning content is on the way! If you have something specific i
 
 ## GitHub Repo Hosted Examples:
 
-### /HoudiniProjects/TOPs_3DGRUT/
+### /HoudiniProjects/TOPS_3DGRUT/
 
-- TOPS_3DGRUT_Static_V001.hip
+- TOPs_3DGRUT_Static_V001.hip
 
 ### /HoudiniProjects/TOPS_AppleCompressor/
 
-- TOPS_AppleCompressor_Image_Sequence_to_Movie_V001.hip
+- TOPs_AppleCompressor_Image_Sequence_to_Movie_V001.hip
 
 ### /HoudiniProjects/TOPS_FusionStudio/
 
-- TOPS_FusionStudio_Fusion_Render_Node_V001.hip
+- TOPs_FusionStudio_Fusion_Render_Node_V001.hip
 
 ### /HoudiniProjects/TOPS_MetashapePro/
 
-- TOPS_MetashapePro_Print_Methods_V001.hip
+- TOPs_MetashapePro_Print_Methods_V001.hip
 
 ### /HoudiniProjects/TOPS_Panotools/
 
 - TOPs_PTS_to_Frameset_Folders_V001.hip
 - TOPs_FFmpeg_Movies_to_Frameset_Images_V001.hip
-- TOPS_PTS_Batch_Stitcher_Frameset_Folders_V001.hip
-- TOPS_PTS_Batch_Stitcher_Single_Frame_V001.hip
+- TOPs_PTS_Batch_Stitcher_Frameset_Folders_V001.hip
+- TOPs_PTS_Batch_Stitcher_Single_Frame_V001.hip
 
-### /HoudiniProjects/TOPs_Postshot/
+### /HoudiniProjects/TOPS_Postshot/
 
-- TOPS_Postshot_Static_V001.hip
+- TOPs_Postshot_Static_V001.hip
+
+### /HoudiniProjects/TOPS_PyAutoGUI/
+
+- TOPs_PyAutoGUI_Demo1_V001.hip
 
 ### /HoudiniProjects/TOPS_RealityCapture/
 

@@ -16,7 +16,7 @@ Example .hip files are provided to help you get started with PyAutoGUI  workflow
 
 ### /HoudiniProjects/TOPS_PyAutoGUI/
 
-- TOPS_PyAutoGUI_Demo1_V001.hip
+- TOPs_PyAutoGUI_Demo1_V001.hip
 
 ## Screenshots
 
@@ -55,11 +55,11 @@ pip show PyAutoGUI
 
 ![PyAutoGUI Pro 2](Images/pyautogui_sitepackages.png)
 
-## TOPS Based Pythonscript Code Snippets
+## TOPSs Based Pythonscript Code Snippets
 
 The Houdini TOPS nodegraph supports the direct execution of Python code snippets with the [Pythonscript node](https://www.sidefx.com/docs/houdini/nodes/top/pythonscript.html). This relies on the Hython (Houdini Python) interpreter matching the version specifics of the Metashape Python module.
 
-### TOPS_PyAutoGUI_Demo1.py
+### TOPs_PyAutoGUI_Demo1.py
 
 ```python
 # Using PyAutoGUI to automate "unscriptable workflows" via GUI automation

@@ -239,7 +239,7 @@ Note: When using COLMAP, it's worth highlighting the 3D Gaussian Raytracing "tra
 An example .hip file is provided to help you get started with 3DGRUT workflows in Houdini:
 
 #### /HoudiniProjects/TOPS_3DGRUT/
-- TOPS_3DGRUT_Static_V001.hip
+- TOPs_3DGRUT_Static_V001.hip
 
 
 ![Houdini Train](Images/tops_3dgrut_static_nodes.png)
