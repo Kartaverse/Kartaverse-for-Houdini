@@ -44,6 +44,6 @@ os.system('start "" "' + str(calcPath) + '"')
 time.sleep(2)
 
 # Type in a number
-ui.write("5318008", interval = 0.25)
+ui.write("0.7734", interval = 0.25)
 ui.press("enter")
 
