@@ -59,7 +59,7 @@ Result:
 
 ![PIP](Images/pip-site-package.png)
 
-4. Update the Houdini TOPS based "pythonscript" node. We need to add some Python code to the textfield to modify the "sys.path.insert()" entry. This will point Hython (Houdini Python) at the site-packages location where the Metashape Python module is installed. The default 3rd party site-packages location used by the included .hip example is:
+4. Customize the attribtuecreate node's "PYTHON_SITE_PACKAGES" variable to point at your local Python site-packages folder. This will point Hython (Houdini Python) at the site-packages location where the Python module is installed. The default 3rd party site-packages location used by the included .hip example is:
 
 ```bash
 C:\Python\Lib\site-packages
@@ -88,8 +88,9 @@ The Houdini TOPs nodegraph supports the direct execution of Python code snippets
 import sys, os
 import importlib
 
-# Update the System PATH to include the Metashape based site-package folder
-sys.path.insert(0, "C:\Python\Lib\site-packages")
+# Update the System PATH to include the user installed Python site-package folder
+sitePackagesPath = str(work_item.data.stringData("PYTHON_SITE_PACKAGES", 0))
+sys.path.insert(0, sitePackagesPath)
 
 # Print the Python version
 # Example: 3.11.7 (main, Feb 22 2024, 17:21:30) [MSC v.1935 64 bit (AMD64)]
@@ -138,8 +139,9 @@ print("[Import Images Complete]")
 import sys, os
 import importlib
 
-# Update the System PATH to include the Metashape based site-package folder
-sys.path.insert(0, "C:\Python\Lib\site-packages")
+# Update the System PATH to include the user installed Python site-package folder
+sitePackagesPath = str(work_item.data.stringData("PYTHON_SITE_PACKAGES", 0))
+sys.path.insert(0, sitePackagesPath)
 
 # Print the Python version
 # Example: 3.11.7 (main, Feb 22 2024, 17:21:30) [MSC v.1935 64 bit (AMD64)]
@@ -187,8 +189,9 @@ print("[Align Cameras Complete]")
 import sys, os
 import importlib
 
-# Update the System PATH to include the Metashape based site-package folder
-sys.path.insert(0, "C:\Python\Lib\site-packages")
+# Update the System PATH to include the user installed Python site-package folder
+sitePackagesPath = str(work_item.data.stringData("PYTHON_SITE_PACKAGES", 0))
+sys.path.insert(0, sitePackagesPath)
 
 # Print the Python version
 # Example: 3.11.7 (main, Feb 22 2024, 17:21:30) [MSC v.1935 64 bit (AMD64)]
@@ -259,8 +262,9 @@ print("[Build Complete]")
 import sys, os
 import importlib
 
-# Update the System PATH to include the Metashape based site-package folder
-sys.path.insert(0, "C:\Python\Lib\site-packages")
+# Update the System PATH to include the user installed Python site-package folder
+sitePackagesPath = str(work_item.data.stringData("PYTHON_SITE_PACKAGES", 0))
+sys.path.insert(0, sitePackagesPath)
 
 # Print the Python version
 # Example: 3.11.7 (main, Feb 22 2024, 17:21:30) [MSC v.1935 64 bit (AMD64)]

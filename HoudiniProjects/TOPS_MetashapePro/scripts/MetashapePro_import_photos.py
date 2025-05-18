@@ -10,8 +10,9 @@
 import sys, os
 import importlib
 
-# Update the System PATH to include the Metashape based site-package folder
-sys.path.insert(0, "C:\Python\Lib\site-packages")
+# Update the System PATH to include the user installed Python site-package folder
+sitePackagesPath = str(work_item.data.stringData("PYTHON_SITE_PACKAGES", 0))
+sys.path.insert(0, sitePackagesPath)
 
 # Print the Python version
 # Example: 3.11.7 (main, Feb 22 2024, 17:21:30) [MSC v.1935 64 bit (AMD64)]
