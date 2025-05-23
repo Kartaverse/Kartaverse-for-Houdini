@@ -34,17 +34,21 @@ doc.open(psxFile)
 # Get the chunk
 chunk = doc.chunk
 
-# Export Model
-if chunk.model:
-    modelFile = str(work_item.data.stringData("EXPORT_MODEL", 0))
-    chunk.exportModel(modelFile)
- 
-# Export the Dense Point Cloud
-if chunk.point_cloud:
-    cloudFile = str(work_item.data.stringData("EXPORT_POINT_CLOUD", 0))
-    chunk.exportPointCloud(cloudFile)
+# Export the camera pose data to the Colmap format
+colmapFile = str(work_item.data.stringData("EXPORT_COLMAP", 0))
+chunk.exportCameras(path=str(colmapFile),
+                    format=metashape.CamerasFormat.CamerasFormatColmap,
+                    save_points=True,
+                    save_images=True,
+                    use_labels=True,
+                    convert_to_pinhole=True,
+                    binary=False)
+
+# Export Results
+pdfFile = str(work_item.data.stringData("PSX_REPORT", 0))
+chunk.exportReport(pdfFile)
 
 # Save the document
 doc.save()
 
-print("[Export Complete]")
+print("[Export Camera Complete]")

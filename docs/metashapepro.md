@@ -2,7 +2,7 @@
 
 The Agisoft [Metashape Pro](https://www.agisoft.com/features/professional-edition/) software supports Python scripting through the use of a Metashape [Python module](https://www.agisoft.com/pdf/metashape_python_api_2_2_1.pdf). This allows for efficient Houdini TOPs based automation of 3DGS workflow tasks. 
 
-There is a handy GitHub repository of [sample Metashape code](https://github.com/agisoft-llc/metashape-scripts/blob/master/src/samples/general_workflow.py) that is a great reference/learning resource when used alongside the Metashape Python API docs.
+There is a handy GitHub repository of [sample Metashape code](https://github.com/agisoft-llc/metashape-scripts/) that is a great reference/learning resource when used alongside the Metashape Python API docs. Make sure to check out the "[general_workflow.py](https://github.com/agisoft-llc/metashape-scripts/blob/master/src/samples/general_workflow.py)" script to understand the common workflow steps.
 
 Note: It is possible to use a Metashape camera pose export with Postshot CLI for 3DGS training.
 
@@ -286,10 +286,6 @@ doc.open(psxFile)
 # Get the chunk
 chunk = doc.chunk
 
-# Export Results
-pdfFile = str(work_item.data.stringData("PSX_REPORT", 0))
-chunk.exportReport(pdfFile)
-
 # Export Model
 if chunk.model:
     modelFile = str(work_item.data.stringData("EXPORT_MODEL", 0))
@@ -307,3 +303,63 @@ print("[Export Complete]")
 
 ```
 
+
+### MetashapePro_export_cameras.py
+
+```python
+# 1. For simplicity, install Python 3.11 to a custom location in the root folder like:
+# C:\Python\
+
+# 2. Download the Metashape Python Module from:
+# https://www.agisoft.com/downloads/installer/
+
+# 3. The Python Module is installed in the command prompt/terminal using:
+# pip install Metashape-*.whl
+
+import sys, os
+import importlib
+
+# Update the System PATH to include the user installed Python site-package folder
+sitePackagesPath = str(work_item.data.stringData("PYTHON_SITE_PACKAGES", 0))
+sys.path.insert(0, sitePackagesPath)
+
+# Print the Python version
+# Example: 3.11.7 (main, Feb 22 2024, 17:21:30) [MSC v.1935 64 bit (AMD64)]
+# print(sys.version)
+
+# Import the metashape Python module
+metashape = importlib.import_module('Metashape.Metashape')
+
+# --------------------------------------
+# Start writing your code here:
+
+# Metashape Project Filename
+psxFile = str(work_item.data.stringData("PSX_PROJECT", 0))
+
+# Open an existing document
+doc = metashape.Document()
+doc.open(psxFile)
+
+# Get the chunk
+chunk = doc.chunk
+
+# Export the camera pose data to the Colmap format
+colmapFile = str(work_item.data.stringData("EXPORT_COLMAP", 0))
+chunk.exportCameras(path=str(colmapFile),
+                    format=metashape.CamerasFormat.CamerasFormatColmap,
+                    save_points=True,
+                    save_images=True,
+                    use_labels=True,
+                    convert_to_pinhole=True,
+                    binary=False)
+
+# Export Results
+pdfFile = str(work_item.data.stringData("PSX_REPORT", 0))
+chunk.exportReport(pdfFile)
+
+# Save the document
+doc.save()
+
+print("[Export Camera Complete]")
+
+```
