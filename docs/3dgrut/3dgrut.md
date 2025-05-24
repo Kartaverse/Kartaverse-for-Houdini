@@ -348,7 +348,7 @@ If you want to look inside a 3dgrut exported cameras.npy file, you can do so wit
     print(trajectory)
 
 Running the code snippet in Python3 will result in the following terminal output:
-    
+
     Warp 1.2.1 initialized:
        CUDA Toolkit 11.8, Driver 12.2
        Devices:
