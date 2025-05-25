@@ -32,6 +32,7 @@ Postshot supports the use of a wide range of CLI (command-line) flags. They can 
 
 Start by reading over the official [Postshot CLI Docs](https://www.jawset.com/docs/d/Postshot+User+Guide/Command-line+Interface).
 
+For Sequence processing, that includes pre-computed colmap camera pose data, the following parameters are a good starting point:
 
 Attribute Create Node:
 
@@ -39,9 +40,13 @@ Executable:
 
     C:\Program Files\Jawset Postshot\bin\postshot-cli.exe
 
-ImportPath:
+ImportImagePath:
 
-    $HIP/images/$F4/
+    $HIP/images/$F4/images
+
+ImportColmapPath:
+
+    $HIP/images/$F4/sparse/0
 
 Profile:
 
@@ -62,7 +67,7 @@ TrainSteps:
 Train Generic Generator Node:
 
 ```bash
-"`@Executable`" train --import "`@ImportPath`" --profile "`@Profile`" --image-select "best" --output "`@OutputPath`" --train-steps-limit `@TrainSteps`
+"`@Executable`" train --import "`@ImportImagePath`" "`@ImportColmapPath`" --profile "`@Profile`" --image-select "best" --output "`@OutputPath`" --train-steps-limit `@TrainSteps`
 ```
 
 Export Generic Generator Node:
