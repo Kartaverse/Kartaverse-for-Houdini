@@ -34,7 +34,7 @@ Start by reading over the official [Postshot CLI Docs](https://www.jawset.com/do
 
 For Sequence processing, that includes pre-computed colmap camera pose data, the following parameters are a good starting point:
 
-Attribute Create Node:
+### Attribute Create Node:
 
 Executable: 
 
@@ -64,17 +64,27 @@ TrainSteps:
 
     20
 
-Train Generic Generator Node:
+### Train Generic Generator Node:
 
 ```bash
 "`@Executable`" train --import "`@ImportImagePath`" "`@ImportColmapPath`" --profile "`@Profile`" --image-select "best" --output "`@OutputPath`" --train-steps-limit `@TrainSteps`
 ```
 
-Export Generic Generator Node:
+### Export Generic Generator Node:
 
 ```bash
 "`@Executable`" export --file "`@OutputPath`" --export-splat-ply "`@ExportPath`"
 ```
+
+### Error Log
+
+The Postshot.log file is saved to:
+
+```bash
+%USERPROFILE%\AppData\Local\Postshot\Postshot.log
+```
+
+### Postshot CLI Details
 
 Here is a listing of the current Postshop v0.6.0 CLI flags that are available:
 
