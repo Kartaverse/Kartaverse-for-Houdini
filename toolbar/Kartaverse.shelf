@@ -12,6 +12,9 @@
     <memberTool name="Kartaverse_Create_Folder"/>
     <memberTool name="Kartaverse_HIP_Folder"/>
     <memberTool name="Kartaverse_ABC_Folder"/>
+    <memberTool name="Kartaverse_COLMAP_Folder"/>
+    <memberTool name="Kartaverse_PLY_Folder"/>
+    <memberTool name="Kartaverse_PSHT_Folder"/>
     <memberTool name="Kartaverse_E57_Folder"/>
     <memberTool name="Kartaverse_GEO_Folder"/>
     <memberTool name="Kartaverse_OBJ_Folder"/>
@@ -311,7 +314,7 @@ def kvr_showFolder(mediaFileName):
 # $HIP
 folderName = str(hipFolder)
 
-print('[Showing Folder] ' + folderName)
+# print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
 ]]></script>
   </tool>
@@ -372,7 +375,7 @@ def kvr_showFolder(mediaFileName):
 # $HIP/abc/
 folderName = str(hipFolder) + '/abc/'
 
-print('[Showing Folder] ' + folderName)
+# print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
 ]]></script>
   </tool>
@@ -434,7 +437,7 @@ def kvr_showFolder(mediaFileName):
 # $HIP/e57/
 folderName = str(hipFolder) + '/e57/'
 
-print('[Showing Folder] ' + folderName)
+# print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
 ]]></script>
   </tool>
@@ -496,7 +499,7 @@ def kvr_showFolder(mediaFileName):
 # $HIP/geo/
 folderName = str(hipFolder) + '/geo/'
 
-print('[Showing Folder] ' + folderName)
+# print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
 ]]></script>
   </tool>
@@ -558,7 +561,7 @@ def kvr_showFolder(mediaFileName):
 # $HIP/obj/
 folderName = str(hipFolder) + '/obj/'
 
-print('[Showing Folder] ' + folderName)
+# print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
 ]]></script>
   </tool>
@@ -681,7 +684,7 @@ def kvr_showFolder(mediaFileName):
 # $HIP/metadata/
 folderName = str(hipFolder) + '/metadata/'
 
-print('[Showing Folder] ' + folderName)
+# print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
 ]]></script>
   </tool>
@@ -804,7 +807,7 @@ def kvr_showFolder(mediaFileName):
 # $HIP/comp/
 folderName = str(hipFolder) + '/comp/'
 
-print('[Showing Folder] ' + folderName)
+# print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
 ]]></script>
   </tool>
@@ -865,7 +868,7 @@ def kvr_showFolder(mediaFileName):
 # $HIP/images/
 folderName = str(hipFolder) + '/images/'
 
-print('[Showing Folder] ' + folderName)
+# print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
 ]]></script>
   </tool>
@@ -928,7 +931,7 @@ padding = 4
 frame = str(hou.intFrame()).zfill(padding)
 folderName = os.path.normpath(str(hipFolder) + '/images/' + frame + '/')
 
-print('[Showing Folder] ' + folderName)
+# print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
 ]]></script>
   </tool>
@@ -989,7 +992,7 @@ def kvr_showFolder(mediaFileName):
 # $HIP/render/
 folderName = str(hipFolder) + '/render/'
 
-print('[Showing Folder] ' + folderName)
+# print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
 ]]></script>
   </tool>
@@ -1118,7 +1121,7 @@ def kvr_showFolder(mediaFileName):
 # $HOUDINI_USER_PREF_DIR/toolbar/
 folderName = str(userPrefsfolder) + '/toolbar/'
 
-print('[Showing Folder] ' + folderName)
+# print('[Showing Folder] ' + folderName)
 kvr_showFolder(folderName)
 ]]></script>
   </tool>
@@ -1867,6 +1870,192 @@ def kvr_showTaskManager():
 
 
 kvr_showTaskManager()
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_PLY_Folder" label="PLY" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# PLY Folder
+import platform
+import sys
+import os
+
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system() == 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system() == 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+
+
+# $HIP/ply/
+folderName = str(hipFolder) + '/ply/'
+
+# print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_PSHT_Folder" label="Postshot" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# PSHT Folder
+import platform
+import sys
+import os
+
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system() == 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system() == 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+
+
+# $HIP/pshty=/
+folderName = str(hipFolder) + '/psht/'
+
+# print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
+]]></script>
+  </tool>
+
+  <tool name="Kartaverse_COLMAP_Folder" label="COLMAP" icon="$HOUDINI_USER_PREF_DIR/toolbar/icons/kvr_directory.png">
+    <script scriptType="python"><![CDATA[# COLMAP Folder
+import platform
+import sys
+import os
+
+# Check if the file is saved
+if hou.hipFile.basename() == "untitled.hip":
+    print("[Warning] Save the Houdini HIP file to disk before running this command.")
+    sys.exit(1)
+
+hipFolder = os.environ['HIP']
+
+# Check the operating system
+# Example: houPlatform = kvr_getPlatform()
+def kvr_getPlatform():
+    import platform
+    houPlatform = ''
+    if platform.system() == 'Windows':
+        houPlatform = 'Windows'
+    elif platform.system() == 'win32':
+        houPlatform = 'Windows'
+    elif platform.system()== 'Darwin':
+        houPlatform = 'Mac'
+    elif platform.system() == 'Linux':
+        houPlatform = 'Linux'
+    elif platform.system() == 'Linux2':
+        houPlatform = 'Linux'
+    else:
+        houPlatform = 'Linux'
+    # print('Running on ' + houPlatform + '\n')
+    return houPlatform
+
+def kvr_showFolder(mediaFileName):
+    houPlatform = kvr_getPlatform()
+    launchCommand = ''
+    # Create the intermediate folders
+    if not os.path.exists(mediaFileName):
+        os.makedirs(mediaFileName, exist_ok=True)
+    # Open the folder in Explorer (Win), Finder (macOS), and xdg-open (Linux)
+    if houPlatform == 'Windows':
+        os.startfile(mediaFileName)
+    elif houPlatform == 'Mac':
+        launchCommand = ['open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+    elif houPlatform == 'Linux':
+        launchCommand = ['xdg-open']
+        launchCommand.append(mediaFileName)
+        import subprocess
+        subprocess.Popen(launchCommand)
+
+
+# $HIP/colmap/
+folderName = str(hipFolder) + '/colmap/'
+
+# print('[Showing Folder] ' + folderName)
+kvr_showFolder(folderName)
 ]]></script>
   </tool>
 </shelfDocument>

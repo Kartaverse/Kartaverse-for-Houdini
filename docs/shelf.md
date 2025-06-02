@@ -31,6 +31,9 @@ macOS Toolbar Path:
 - Create HIP Sub-Folders
 - HIP
 - ABC
+- COLMAP
+- PLY
+- Postshot
 - E57
 - GEO
 - OBJ
