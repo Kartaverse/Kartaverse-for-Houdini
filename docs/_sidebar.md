@@ -17,6 +17,7 @@
 		- [NormalCrafter for ComfyUI](comfyui/NormalCrafter)
 	- GUI Automation
 		- [PyAutoGUI](pyautogui)
+		- [Pushover Notifications](pushover)
 	- Volumetric Video Workflows
 		- [Overview](volumetric_video/overview)
 		- [Project Hierarchy](volumetric_video/project_hierarchy)
