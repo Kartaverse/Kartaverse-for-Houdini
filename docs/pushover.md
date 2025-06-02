@@ -18,6 +18,12 @@ Example .hip files are provided to help you get started with Pushover's cURL bas
 
 ![Pushover Notifications](Images/pushover-notifications.png)
 
+On a mobile device a received message looks like this:
+
+![Pushover Notification Received](Images/pushover-notifications-received.png)
+
+## Attributes
+
 The "attribute create" node is used to customize the job parameters. The following attributes can be edited:
 
 ### PUSHOVER_API_TOKEN
