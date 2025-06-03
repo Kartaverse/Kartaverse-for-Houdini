@@ -36,7 +36,7 @@ Enter your Pushover User ID
 
 ### Title
 
-The heading line for the notification. 
+The heading line for the notification
 
 ### NOTE
 
