@@ -34,7 +34,7 @@ The Kartaverse API Token on Pushover
 
 Enter your Pushover User ID
 
-### Title
+### TITLE
 
 The heading line for the notification
 
