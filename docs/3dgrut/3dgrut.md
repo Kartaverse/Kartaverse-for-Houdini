@@ -457,6 +457,12 @@ If you want to look "under the hood" at the NVIDIA 3dgrut Python source code tha
 - $HOME/3dgrut/threedgrut_playground/utils/[video_out.py](https://github.com/nv-tlabs/3dgrut/blob/d4af752efdd190c3540ba9a9a8f6392e9057d2e7/threedgrut_playground/utils/video_out.py#L44)
 - $HOME/3dgrut/threedgrut_playground/[ps_gui.py](https://github.com/nv-tlabs/3dgrut/blob/d4af752efdd190c3540ba9a9a8f6392e9057d2e7/threedgrut_playground/ps_gui.py#L845)
 
+## 3DGS PLY Export
+
+If you want the 3DGRUT training process to output a 3DGS style .ply file, you should append the following CLI flag to the end of the parameters list:
+
+    export_ply.enabled=true
+
 ## Troubleshooting
 
 ### CUDA Memory Errors
