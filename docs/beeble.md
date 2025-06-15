@@ -4,7 +4,7 @@ The [Beeble Switchlight API](https://www.switchlight-api.beeble.ai/docs) allows 
 
 ## Examples
 
-An example .hip file is provided help you get started with Postshot workflows in Houdini:
+An example .hip file is provided help you get started with Beeble workflows in Houdini:
 
 ### /HoudiniProjects/TOPS_BeebleSwitchLight/
 
@@ -16,7 +16,7 @@ An example .hip file is provided help you get started with Postshot workflows in
 
 ## Usage
 
-To use this example you need to edit the attributecreate node. Update the "BEEBLE_SWITCHLIGHT_API_KEY"  variable to replace the temporary value "ENTER-YOUR-API-KEY-HERE" with your active Beeble Switchlight API key.
+To use this example you need to edit the attributecreate node. Update the "BEEBLE_SWITCHLIGHT_API_KEY" variable to replace the temporary value "ENTER-YOUR-API-KEY-HERE" with your active Beeble Switchlight API key.
 
 The rangegenerate node allows you to deifne the image sequence range that is passed to the SwitchLight API for processing. By default a single frame image is used to reduce API usage levels.
 
