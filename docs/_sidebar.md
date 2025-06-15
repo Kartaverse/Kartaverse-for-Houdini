@@ -12,6 +12,8 @@
 		- [NVIDIA 3D Gaussian Raytracing](3dgrut/3dgrut)
 		- [Jawset Postshot 3DGS Automation](postshot)
 		- [Agisoft Metashape Pro Python](metashapepro)
+	- PBR Material Creation
+		- [Beeble SwitchLight API](beeble)
 	- ComfyUI Automation
 		- [MatAnyone for ComfyUI](comfyui/MatAnyone)
 		- [NormalCrafter for ComfyUI](comfyui/NormalCrafter)

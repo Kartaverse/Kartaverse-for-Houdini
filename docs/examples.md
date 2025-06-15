@@ -14,6 +14,10 @@ As always, more learning content is on the way! If you have something specific i
 
 - TOPs_AppleCompressor_Image_Sequence_to_Movie_V001.hip
 
+### /HoudiniProjects/TOPS_BeebleSwitchLight/
+
+- TOPs_BeebleSwitchlight_API_V001.hip
+
 ### /HoudiniProjects/TOPS_FusionStudio/
 
 - TOPs_FusionStudio_Fusion_Render_Node_V001.hip
