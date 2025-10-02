@@ -288,6 +288,9 @@ If you are using Miniconda, a new terminal session can be started up using:
 
 The EnvironmentEdit node is used to customize the PYTHONHOME and PYTHONPATH environment variables. This helps redefine the Python version and site-packages used by 3dgrut so it is compatible with a virtual environment like Conda or Miniconda.
 
+The "CUDA_HOME" environment variable is set to match the path that is used by the Conda virtual environment's "$CONDA_PREFIX". On a typical Linux Conda setup the "CUDA_HOME"  path is expanded to the absolute filepath version of "$HOME/miniconda3/envs/Kartaverse".
+
+    CUDA_HOME = `@MINICONDA_ENV`
     PYTHONHOME = `@MINICONDA_ENV`
     PYTHONPATH = `@MINICONDA_ENV`/lib/python3.11/site-packages
 
