@@ -203,6 +203,14 @@ If you attempt to use the nvdiffrec train.py script with the "--display-interval
 			raise EnvironmentError("Unknown compute capability. Ensure PyTorch with CUDA support is installed.")
 	OSError: Unknown compute capability. Ensure PyTorch with CUDA support is installed.
 
+You can verify the installed copy of PyTorch has CUDA support by running:
+
+	python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+
+If CUDA support is functional the terminal result will look like:
+
+	2.8.0+cu128 True
+
 ### Lock Files
 
 If you accidentally run two sessions of nvdiffrec at the same time you might get into a situation where a lock file is created. If run the nvdiffrec train.py script again, and get a lock error message in the terminal window, you can clear the lock file using:
