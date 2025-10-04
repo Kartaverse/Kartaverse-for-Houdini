@@ -6,6 +6,11 @@ As always, more learning content is on the way! If you have something specific i
 
 ## GitHub Repo Hosted Examples:
 
+### /HoudiniProjects/COPS_PBR_to_COLMAP
+
+- COPS_Beeble_to_COLMAP_Masking_v001.hip
+- COPS_PBR_PreviewMaterial_v001.hip
+
 ### /HoudiniProjects/TOPS_3DGRUT/
 
 - TOPs_3DGRUT_Static_V001.hip
