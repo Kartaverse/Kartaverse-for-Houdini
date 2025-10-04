@@ -44,10 +44,12 @@ The PBR pass texture maps are imported into COPS using "file" nodes:
 
 The source media is read with "file" nodes from the following file paths:
 
-- $HIP/comp/$F4/basecolor/0000.png
-- $HIP/comp/$F4/specular/0000.png
-- $HIP/comp/$F4/roughness/0000.png
-- $HIP/comp/$F4/normal/0000.png
+- $HIP/comp/0001/basecolor/$F4.png
+- $HIP/comp/0001/specular/$F4.png
+- $HIP/comp/0001/roughness/$F4.png
+- $HIP/comp/0001/normal/$F4.png
+
+Note: The "0001" value in this filepath represents the camera view number, and the $F4 token represents a 4 digit frame padded version of the timeline frame number.
 
 After the images are modified, a "rop_image" node saves the footage:
 
@@ -59,6 +61,8 @@ The processed media is written back to a per-camera view COLMAP file hierarchy u
 - $HIP/colmap/specular/images/000001_$F1.png
 - $HIP/colmap/roughness/images/000001_$F1.png
 - $HIP/colmap/normal/images/000001_$F1.png
+
+Note: The $F1 token represents a 1 digit frame padded version of the timeline frame number.
 
 With a multi-view camera array that has 204 cameras, the "colmap" project folders are structured like this:
 
