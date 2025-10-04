@@ -11,6 +11,7 @@
 	- 3DGS Workflows
 		- [Windows Subsystem for Linux](wsl/wsl)
 		- [NVIDIA 3D Gaussian Raytracing](3dgrut/3dgrut)
+		- [NVIDIA nvdiffrec](nvdiffrec/nvdiffrec)
 		- [Jawset Postshot 3DGS Automation](postshot)
 		- [Agisoft Metashape Pro Python](metashapepro)
 	- PBR Material Creation
