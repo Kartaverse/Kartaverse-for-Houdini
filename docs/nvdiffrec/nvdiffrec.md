@@ -45,6 +45,8 @@ If CudaToolkit is installed and works you should see a terminal result like:
 	Built on Sun_Jul_28_19:07:16_PDT_2019
 	Cuda compilation tools, release 10.1, V10.1.243
 
+## Train a scene
+
 Let's activate the nvdiffrec virtual environment, and navigate into the nvdiffrec folder to start a training run using the sample data:
 
 	conda activate nvdiffrec
@@ -155,6 +157,7 @@ This output folder will have content named like:
 - mesh/texture_ks.png
 - mesh/texture_n.png
 
+## Examples
 
 Sample NeRD datasets:
 
@@ -211,3 +214,81 @@ If you accidentally run two sessions of nvdiffrec at the same time you might get
 Then you can re-run the training task:
 
 	python train.py --config configs/bob.json
+
+## Houdini TOPs (Task Operator) Workflows
+
+Lets add a layer of nodal workflow automation. We are going to do this with help of SideFX [Houdini TOPs](https://www.sidefx.com/docs/houdini/tops/index.html) (task operators) nodes. 
+
+This approach makes it possible to create modular, reusable, node-graphs that control NVIDIA's nvdiffrec library using the command-line. The end goal is to create a fully templated system that can train a single static scene. The same nodes can be expanded to create a flexible pipeline that can be run locally or in the cloud.
+
+### Examples
+
+An example .hip file is provided to help you get started with nvdiffrec workflows in Houdini:
+
+#### /HoudiniProjects/TOPS_nvdiffrec/
+- TOPs_nvdiffrec_Static_V001.hip
+
+
+This HIP file requires you to have launched Houdini/HQueue from inside a virtual environment session that has CUDA Toolkit, Python 3.11, and several other python packages pre-installed.
+
+If you are using Miniconda, a new terminal session can be started up using:
+
+    conda activate nvdiffrec
+    cd $HOME/nvdiffrec/
+    houdini
+
+### Parameter Customization
+
+#### Attribute Create:
+
+![Houdini Train](Images/tops_nvdiffrec_static_1_attribute_create.png)
+
+"MINICONDA_ENV" is the folder pathwhere your active Anaconda Miniconda virtual environment exists at. This is typically a location inside your user accounts home folder like "$HOME/miniconda3/envs/nvdiffrec/".
+
+"WORKING_DIR" is the folder path where the nvdiffrec Github repo contents are located. Typically this is a folder like "$HOME/nvdiffrec/".
+
+"SCRIPT_NAME" is the "train.py" script filename.
+
+"CONFIG_NAME" is a relative JSON filepath. It specifies a .json file that exists in a folder like "$HOME/nvdiffrec/configs". This folder has presets that are optimized for the nerd and nerf sample datasets.
+
+#### Environment Edit:
+
+![Houdini Train](Images/tops_nvdiffrec_static_2_env_vars.png)
+
+The EnvironmentEdit node is used to customize the PYTHONHOME and PYTHONPATH environment variables. This helps redefine the Python version and site-packages used by nvdiffrec so it is compatible with a virtual environment like Conda or Miniconda.
+
+The "CUDA_HOME" environment variable is set to match the path that is used by the Conda virtual environment's "$CONDA_PREFIX". On a typical Linux Conda setup the "CUDA_HOME"  path is expanded to the absolute filepath version of "$HOME/miniconda3/envs/nvdiffrec".
+
+    CUDA_HOME = `@MINICONDA_ENV`
+    PYTHONHOME = `@MINICONDA_ENV`
+    PYTHONPATH = `@MINICONDA_ENV`/lib/python3.11/site-packages
+
+#### Generic Generator:
+
+![Houdini Train](Images/tops_nvdiffrec_static_3_generator.png)
+
+The GenericGenerator node runs the command-line job task. The custom variables we defined in the Attribute Create nodde are referenced when building out the command-line flags that are passed to Python3 and the train.py script:
+
+    "`@MINICONDA_ENV`bin/python3" "`@WORKING_DIR``@SCRIPT_NAME`" --config "`@WORKING_DIR``@CONFIG_NAME`"
+
+### Running your first TOPs job
+
+Click on the orange colored triangle button in the Tasks toolbar to start cooking the Houdini TOPs work items. This will start the batch rendering job. 
+
+![Houdini Train](Images/tops_nvdiffrec_static_4_opcook.png)
+
+The results of the opcook operation can be seen in the node graph, and in the "Task Graph Table" panel. Click on the solid green circle inside the GenericGenerator node shape to view this work item's Task info.
+
+![Houdini Train](Images/tops_nvdiffrec_static_4_green_circle.png)
+
+At this point, you can double-click on the Task Graph Table's "train_genericgenerator1" entry to display the cooking status in more detail.
+
+![Houdini Train](Images/tops_nvdiffrec_static_4_taskgraph.png)
+
+As your GPU fans spin up under the compute load from the nvidiffrec training task, you will see the pages of progress messages scroll by in the status window. The rendering process will take a while so please be patient!
+
+When the training job is done you can close the status window. Take a moment to look at the TOPs node graph. If everything succeeded you should see green circles with checkmarks next to each of the nodes:
+
+![Houdini Train](Images/tops_nvdiffrec_static_4_cooked_nodes.png)
+
+You've now used Houdini TOPs to process your first nvidiffrec dataset!
