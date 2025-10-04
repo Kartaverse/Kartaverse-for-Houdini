@@ -51,6 +51,11 @@ Let's activate the nvdiffrec virtual environment, and navigate into the nvdiffre
 	cd $HOME/nvdiffrec/
 	python train.py --config configs/bob.json
 
+If you want to see an interactive preview as the training runs we can add an extra CLI flag:
+
+	conda activate nvdiffrec
+	cd $HOME/nvdiffrec/
+	python train.py --config configs/bob.json --display-interval 10
 
 When the training job starts it lists the base configuration values used:
 
@@ -151,7 +156,13 @@ This output folder will have content named like:
 - mesh/texture_ks.png
 - mesh/texture_n.png
 
-If you download sample datasets from the web install that content to:
+
+Sample NeRD datasets:
+
+	https://github.com/vork/moldGoldCape
+	https://github.com/vork/ethiopianHead
+
+If you download sample datasets from the web, install that content into sub-folders located inside the nvdiffrec data folder:
 
 	$HOME/nvdiffrec/data/
 
