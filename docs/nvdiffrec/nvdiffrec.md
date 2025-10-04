@@ -108,7 +108,6 @@ When the training job starts it lists the base configuration values used:
 	---------
 	DatasetMesh: ref mesh has 10688 triangles and 5344 vertices
 
-
 Then progress information will be displayed as the task runs:
 
 	iter=  260, img_loss=0.007175, reg_loss=0.015584, lr=0.02660, time=247.0 ms, rem=3.05 m
@@ -185,6 +184,21 @@ You can try solving this issue using:
 
 	pip uninstall numpy
 	pip install "numpy<2.0"
+
+## PyTorch CUDA
+
+If you attempt to use the nvdiffrec train.py script with the "--display-interval" CLI flag, you will see the following error message when PyTorch is used without CUDA support:
+
+	Traceback (most recent call last):
+		File "/home/vfx/nvdiffrec/train.py", line 36, in <module>
+			from render import mlptexture
+		File "/home/vfx/nvdiffrec/render/mlptexture.py", line 11, in <module>
+			import tinycudann as tcnn
+		File "/home/vfx/miniconda3/envs/nvdiffrec/lib/python3.11/site-packages/tinycudann/__init__.py", line 9, in <module>
+			from tinycudann.modules import free_temporary_memory, NetworkWithInputEncoding, Network, Encoding
+		File "/home/vfx/miniconda3/envs/nvdiffrec/lib/python3.11/site-packages/tinycudann/modules.py", line 19, in <module>
+			raise EnvironmentError("Unknown compute capability. Ensure PyTorch with CUDA support is installed.")
+	OSError: Unknown compute capability. Ensure PyTorch with CUDA support is installed.
 
 ### Lock Files
 
