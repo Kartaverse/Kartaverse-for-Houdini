@@ -217,7 +217,7 @@ Then you can re-run the training task:
 
 ## Houdini TOPs (Task Operator) Workflows
 
-Lets add a layer of nodal workflow automation. We are going to do this with help of SideFX [Houdini TOPs](https://www.sidefx.com/docs/houdini/tops/index.html) (task operators) nodes. 
+Lets add nodal workflow automation to the nvdiffrec efforts. We are going to do this with help of SideFX [Houdini TOPs](https://www.sidefx.com/docs/houdini/tops/index.html) (task operators) nodes.
 
 This approach makes it possible to create modular, reusable, node-graphs that control NVIDIA's nvdiffrec library using the command-line. The end goal is to create a fully templated system that can train a single static scene. The same nodes can be expanded to create a flexible pipeline that can be run locally or in the cloud.
 
