@@ -2,9 +2,7 @@
 
 ## Overview
 
-This guide shows how Houdini can be used as key tool in next-generation volumetric video workflows.
-
-Houdini's Copernicus (COPs) node graph is an excellent tool for pre-processing multi-view camera array data so it can be used with interactive relighting techniques in post-production.
+This guide shows how Houdini can be used as key tool in next-generation volumetric video workflows. Houdini's Copernicus (COPs) node graph is an excellent tool for pre-processing multi-view camera array data so it can be used with interactive relighting techniques in post-production.
 
 ## What's up with PBR-GS?
 
@@ -42,7 +40,7 @@ This is what the COPS network looks like:
 
 The PBR pass texture maps are imported into COPS using "file" nodes:
 
-![Colmap](Images/COPS_COLMAP_basecolor_rop_image.png)
+![Colmap](Images/COPS_COLMAP_basecolor.png)
 
 The source media is read with "file" nodes from the following file paths:
 
@@ -53,7 +51,7 @@ The source media is read with "file" nodes from the following file paths:
 
 After the images are modified, a "rop_image" node saves the footage:
 
-![Colmap](Images/COPS_COLMAP_basecolor.png)
+![Colmap](Images/COPS_COLMAP_basecolor_rop_image.png)
 
 The processed media is written back to a per-camera view COLMAP file hierarchy using "rop_image" node based output file paths:
 
@@ -92,16 +90,16 @@ normal PBR pass:
 - $HIP/colmap/normal/sparse/0/images.txt
 - $HIP/colmap/normal/sparse/0/points3D.txt
 
-These colmap folders are then run through a typical volumetric video/4DGS training process.  This would typically involve the use of photogrammetry and gaussian splatting tools like: COLMAP, Agisoft Metashape Pro, RealityScan, Postshot, and NVIDIA 3DGRUT.
+These colmap folders are then run through a volumetric video/4DGS training process. This would typically involve the use of photogrammetry and gaussian splatting tools like: COLMAP, Agisoft Metashape Pro, RealityScan, Postshot, and NVIDIA 3DGRUT.
 
 ## COPS PBR PreviewMaterial
 
-With this example .hip file, Beeble Switchlight processed PBR texture maps are loaded into a COPs nodegraph and connected to a previewmaterial node. This allows you to assess the PBR maps quickly and easily.
+With this example .hip file, Beeble Switchlight processed PBR texture maps are loaded into a COPs nodegraph and connected to a previewmaterial node. This allows you to review the consistency and quality of the PBR maps quickly and easily.
 
-The basecolor and normal texture maps are treated as RGB imagery. The specular and roughness are loaded as mono greyscale imagery. The alpha mask is connected to the opacity channel.
+The Beeble generated basecolor and normal texture maps are treated as RGB imagery. The specular and roughness maps are loaded as mono greyscale imagery. The alpha mask is connected to the PreviewMaterial node's opacity channel.
 
 ![PreviewMaterial](Images/COPS_PBR_PreviewMaterial.png)
 
-The PreviewMaterial has a geo input connection that allows you to bring in reference geometry. You can also choose from several primitive stand-in mesh procedurals.
+The PreviewMaterial node has a geo input connection that allows you to bring in reference geometry. You can also choose from several primitive stand-in mesh procedurals.
 
-The results of the PreviewMaterial node are passed downstream in the node graph via geo and material output connections.
+The resulting output from the PreviewMaterial node can be passed downstream in the node graph via the geo and material output connections.
