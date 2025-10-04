@@ -226,6 +226,7 @@ This approach makes it possible to create modular, reusable, node-graphs that co
 An example .hip file is provided to help you get started with nvdiffrec workflows in Houdini:
 
 #### /HoudiniProjects/TOPS_nvdiffrec/
+
 - TOPs_nvdiffrec_Static_V001.hip
 
 ![Houdini Train](Images/tops_nvdiffrec_static_nodes.png)

@@ -26,6 +26,10 @@ As always, more learning content is on the way! If you have something specific i
 
 - TOPs_MetashapePro_Print_Methods_V001.hip
 
+### /HoudiniProjects/TOPS_nvdiffrec/
+
+- TOPs_nvdiffrec_Static_V001.hip
+
 ### /HoudiniProjects/TOPS_Panotools/
 
 - TOPs_PTS_to_Frameset_Folders_V001.hip
