@@ -228,6 +228,7 @@ An example .hip file is provided to help you get started with nvdiffrec workflow
 #### /HoudiniProjects/TOPS_nvdiffrec/
 - TOPs_nvdiffrec_Static_V001.hip
 
+![Houdini Train](Images/tops_nvdiffrec_static_nodes.png)
 
 This HIP file requires you to have launched Houdini/HQueue from inside a virtual environment session that has CUDA Toolkit, Python 3.11, and several other python packages pre-installed.
 
