@@ -15,18 +15,24 @@ The following commands can be entered in a new terminal session to install Conda
 	./Miniconda3-py39_4.12.0-Linux-x86_64.sh
 	
 	conda create -y --name "nvdiffrec" python==3.11 ipython
+	
+	conda activate nvdiffrec
+	conda config --set channel_priority flexible
+	conda update -n base -c defaults conda
+
+If required, you can upgrade conda using:
+
+	conda install conda=25.9.0
 
 Next we are going to activate the virtual environment and install the required libraries:
 
 	conda activate nvdiffrec
-	conda install conda-forge::cuda-python conda-forge::tiny-cuda-nn
-	conda update -n base -c defaults conda
 	
-	sudo apt install nvidia-cuda-toolkit nvidia-cuda-toolkit-gcc
+	conda install nvidia::cuda nvidia::cudatoolkit
 	
-	pip install "numpy<2.0" "opencv-python<4.12.0" "setuptools <72.1.0" "slangtorch==1.3.4" scikit-learn plyfile torchmetrics rich imageio pygltflib usd-core
-	pip install torch torchvision torchaudio rich
-	pip install cupy ninja imageio PyOpenGL glfw xatlas gdown imageio imageio-freeimage
+	conda install pytorch torchvision torchaudio pytorch-cuda tiny-cuda-nn
+	
+	pip install "numpy<2.0"  "setuptools <72.1.0" "opencv-python<4.12.0" "slangtorch==1.3.4" scikit-learn plyfile rich imageio pygltflib usd-core cupy ninja imageio PyOpenGL glfw xatlas gdown imageio imageio-freeimage
 
 Then we download the nvdiffrast and nvdiffrec repos:
 
@@ -40,10 +46,10 @@ We can validate NVIDIA CudaToolkit is working from the terminal session by runni
 
 If CudaToolkit is installed and works you should see a terminal result like:
 
-	nvcc: NVIDIA (R) Cuda compiler driver
-	Copyright (c) 2005-2019 NVIDIA Corporation
-	Built on Sun_Jul_28_19:07:16_PDT_2019
-	Cuda compilation tools, release 10.1, V10.1.243
+	Copyright (c) 2005-2024 NVIDIA Corporation
+	Built on Thu_Mar_28_02:18:24_PDT_2024
+	Cuda compilation tools, release 12.4, V12.4.131
+	Build cuda_12.4.r12.4/compiler.34097967_0
 
 ## Train a scene
 
@@ -209,7 +215,21 @@ You can verify the installed copy of PyTorch has CUDA support by running:
 
 If CUDA support is functional the terminal result will look like:
 
-	2.8.0+cu128 True
+	2.5.1 True
+
+If this doesn't work, you can check if PyTorch is installed using:
+
+	python -c "import torch; print(torch.__version__)"
+
+If torch is functional the terminal result will look like:
+
+	2.5.1
+
+If torch is not found, python will return an error like:
+
+	Traceback (most recent call last):
+		File "<string>", line 1, in <module>
+	AttributeError: module 'torch' has no attribute '__version__'
 
 ### Lock Files
 
