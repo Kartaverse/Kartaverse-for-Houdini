@@ -2,9 +2,9 @@
 
 NVIDIA has released the source code for the [nvdiffrec](https://github.com/NVlabs/nvdiffrec) library for Linux. This is connected to the paper "[Extracting Triangular 3D Models, Materials, and Lighting From Images](https://nvlabs.github.io/nvdiffrec/)". The nvdiffrec source code is covered by the non-commercial [NVIDIA Source Code License](https://github.com/NVlabs/nvdiffrec/blob/main/LICENSE.txt).
 
-## Setup the Conda environment on MintOS Linux
+## Setup the Conda virtual environment on MintOS Linux
 
-The following commands can be entered in a new terminal session to install Conda and create a new virtual environment named "dmodel":
+The following commands can be entered in a new terminal session to install Conda:
 
 	sudo apt-get update
 	sudo apt install -y build-essential git
@@ -15,35 +15,29 @@ The following commands can be entered in a new terminal session to install Conda
 	./Miniconda3-latest-Linux-x86_64.sh -b -c
 	conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
 	conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
-	conda config --add channels nvidia
 	conda config --add channels conda-forge
 	conda config --set channel_priority flexible
-	conda update -n base -c defaults conda
-	
-	conda create -y --name "dmodel" python==3.11
 
 If required, you can upgrade conda using:
 
 	conda install conda
 
-Next we are going to activate the virtual environment and install the remaining libraries:
+Next we are going to create and activate a new virtual environment named "dmodel", and install the remaining libraries:
 
+	conda create -y --name "dmodel" python==3.9 gcc_linux-64=13
 	conda activate dmodel
 	
-	conda install cmake
-	conda install -c conda-forge cuda cudatoolkit=11.8
-	conda install -c pytorch pytorch torchvision torchaudio numpy cupy
+	conda install cmake openssl freeimage pytorch torchvision torchaudio numpy cupy cuda cudatoolkit=11.8 -c pytorch -c conda-forge
 	
-	pip install plyfile rich ninja imageio PyOpenGL glfw xatlas gdown imageio imageio-freeimage
+	pip install ninja imageio imageio-freeimage PyOpenGL glfw xatlas gdown plyfile rich
 	
-	conda install -c conda-forge gcc_linux-ppc64le=13
-	export CUDAToolkit_ROOT=$CONDA_PREFIX
-	git clone --recursive https://github.com/NVlabs/tiny-cuda-nn
-	cd $HOME/tiny-cuda-nn
-	mkdir build
-	cd build
-	cmake ..
-	make
+	pip install --use-pep517 --no-build-isolation --no-deps git+https://github.com/NVlabs/tiny-cuda-nn#subdirectory=bindings/torch
+
+Note: When this guide was written on (2025-10-05) I was not able to find a source for the nvdiffrec recommended pip package "imageio_download_bin" that is used in the "nvdiffrec/data" folder example scripts to automatically download assets. 
+
+Note: The NVIDIA tiny-cuda-nn library wants to use GCC 13 for code compiling, not the default Linux OS provided GCC 14 release. You can check your active GCC compiler version using:
+
+	gcc --version
 
 Note: If you have difficulty tracking down a specific version of cudatoolkit you can search for the exact version you require using the conda package name:
 
@@ -53,12 +47,15 @@ or
 
 	conda search conda-forge::cudatoolkit
 
+## Install nvdiffrec on Linux
+
 Then we download the nvdiffrast and nvdiffrec repos:
 
 	pip install git+https://github.com/NVlabs/nvdiffrast/
 	
 	git clone --recursive https://github.com/NVlabs/nvdiffrec
-
+	
+	
 We can validate NVIDIA CudaToolkit is working from the terminal session by running the CUDA compiler program:
 
 	nvcc --version
