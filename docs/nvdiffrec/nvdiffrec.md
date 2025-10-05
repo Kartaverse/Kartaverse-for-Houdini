@@ -4,35 +4,45 @@ NVIDIA has released the source code for the [nvdiffrec](https://github.com/NVlab
 
 ## Setup the Conda environment on MintOS Linux
 
-The following commands can be entered in a new terminal session to install Conda and create a new virtual environment named "nvdiffrec":
+The following commands can be entered in a new terminal session to install Conda and create a new virtual environment named "dmodel":
 
 	sudo apt-get update
 	sudo apt install git
 	
 	cd $HOME
-	wget --no-check-certificate https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Linux-x86_64.sh
+	wget --no-check-certificate https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 	chmod -v +x Miniconda*.sh
-	./Miniconda3-py39_4.12.0-Linux-x86_64.sh
+	./Miniconda3-latest-Linux-x86_64.sh -b -c
+	conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+	conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+	conda config --add channels nvidia
+	conda config --add channels conda-forge
 	
-	conda create -y --name "nvdiffrec" python==3.11 ipython
+	conda create -y --name "dmodel" python==3.11 ipython
 	
-	conda activate nvdiffrec
+	conda activate dmodel
 	conda config --set channel_priority flexible
 	conda update -n base -c defaults conda
 
 If required, you can upgrade conda using:
 
-	conda install conda=25.9.0
+	conda install conda
 
 Next we are going to activate the virtual environment and install the required libraries:
 
-	conda activate nvdiffrec
+	conda activate dmodel
 	
-	conda install nvidia::cuda nvidia::cudatoolkit
+	conda install numpy pytorch torchvision torchaudio cudatoolkit=11.8 tiny-cuda-nn -c pytorch
 	
-	conda install pytorch torchvision torchaudio pytorch-cuda tiny-cuda-nn
-	
-	pip install "numpy<2.0"  "setuptools <72.1.0" "opencv-python<4.12.0" "slangtorch==1.3.4" scikit-learn plyfile rich imageio pygltflib usd-core cupy ninja imageio PyOpenGL glfw xatlas gdown imageio imageio-freeimage
+	pip install "setuptools <72.1.0" "opencv-python<4.12.0" "slangtorch==1.3.4" scikit-learn plyfile rich imageio pygltflib usd-core cupy ninja imageio PyOpenGL glfw xatlas gdown imageio imageio-freeimage
+
+Note: If you have difficulty tracking down a specific version of cudatoolkit you can search for the exact version you require using the conda package name:
+
+	conda search cudatoolkit
+
+or
+
+	conda search conda-forge::cudatoolkit
 
 Then we download the nvdiffrast and nvdiffrec repos:
 
@@ -46,22 +56,23 @@ We can validate NVIDIA CudaToolkit is working from the terminal session by runni
 
 If CudaToolkit is installed and works you should see a terminal result like:
 
-	Copyright (c) 2005-2024 NVIDIA Corporation
-	Built on Thu_Mar_28_02:18:24_PDT_2024
-	Cuda compilation tools, release 12.4, V12.4.131
-	Build cuda_12.4.r12.4/compiler.34097967_0
+	nvcc: NVIDIA (R) Cuda compiler driver
+	Copyright (c) 2005-2025 NVIDIA Corporation
+	Built on Tue_May_27_02:21:03_PDT_2025
+	Cuda compilation tools, release 12.9, V12.9.86
+	Build cuda_12.9.r12.9/compiler.36037853_0
 
 ## Train a scene
 
 Let's activate the nvdiffrec virtual environment, and navigate into the nvdiffrec folder to start a training run using the sample data:
 
-	conda activate nvdiffrec
+	conda activate dmodel
 	cd $HOME/nvdiffrec/
 	python train.py --config configs/bob.json
 
 If you want to see an interactive preview as the training runs we can add an extra CLI flag:
 
-	conda activate nvdiffrec
+	conda activate dmodel
 	cd $HOME/nvdiffrec/
 	python train.py --config configs/bob.json --display-interval 10
 
@@ -196,6 +207,22 @@ You can try solving this issue using:
 
 ## PyTorch CUDA
 
+If you don't have CUDA setup in your conda virtual environment you will see the following error message when you attempt to use the nvdiffrec train.py script:
+
+	fatal error: cuda_runtime_api.h: No such file or directory
+			6 | #include <cuda_runtime_api.h>
+				|          ^~~~~~~~~~~~~~~~~~~~
+	compilation terminated.
+	ninja: build stopped: subcommand failed.
+
+You can validate if the "cuda_runtime_api.h" file exists on disk using:
+
+	ls /usr/local/cuda/include/cuda_runtime_api.h
+
+You can also look in this conda folder:
+
+	ls $CONDA_PREFIX/include/
+
 If you attempt to use the nvdiffrec train.py script with the "--display-interval" CLI flag, you will see the following error message when PyTorch is used without CUDA support:
 
 	Traceback (most recent call last):
@@ -215,7 +242,7 @@ You can verify the installed copy of PyTorch has CUDA support by running:
 
 If CUDA support is functional the terminal result will look like:
 
-	2.5.1 True
+	2.7.1 True
 
 If this doesn't work, you can check if PyTorch is installed using:
 
@@ -223,7 +250,7 @@ If this doesn't work, you can check if PyTorch is installed using:
 
 If torch is functional the terminal result will look like:
 
-	2.5.1
+	2.7.1
 
 If torch is not found, python will return an error like:
 
@@ -263,7 +290,7 @@ This HIP file requires you to have launched Houdini/HQueue from inside a virtual
 
 If you are using Miniconda, a new terminal session can be started up using:
 
-    conda activate nvdiffrec
+    conda activate dmodel
     cd $HOME/nvdiffrec/
     houdini
 
@@ -273,7 +300,7 @@ If you are using Miniconda, a new terminal session can be started up using:
 
 ![Houdini Train](Images/tops_nvdiffrec_static_1_attribute_create.png)
 
-"MINICONDA_ENV" is the folder pathwhere your active Anaconda Miniconda virtual environment exists at. This is typically a location inside your user accounts home folder like "$HOME/miniconda3/envs/nvdiffrec/".
+"MINICONDA_ENV" is the folder pathwhere your active Anaconda Miniconda virtual environment exists at. This is typically a location inside your user accounts home folder like "$HOME/miniconda3/envs/dmodel/".
 
 "WORKING_DIR" is the folder path where the nvdiffrec Github repo contents are located. Typically this is a folder like "$HOME/nvdiffrec/".
 
