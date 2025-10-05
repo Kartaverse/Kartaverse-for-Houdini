@@ -7,7 +7,7 @@ NVIDIA has released the source code for the [nvdiffrec](https://github.com/NVlab
 The following commands can be entered in a new terminal session to install Conda and create a new virtual environment named "dmodel":
 
 	sudo apt-get update
-	sudo apt install git
+	sudo apt install -y build-essential git
 	
 	cd $HOME
 	wget --no-check-certificate https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -17,24 +17,33 @@ The following commands can be entered in a new terminal session to install Conda
 	conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
 	conda config --add channels nvidia
 	conda config --add channels conda-forge
-	
-	conda create -y --name "dmodel" python==3.11 ipython
-	
-	conda activate dmodel
 	conda config --set channel_priority flexible
 	conda update -n base -c defaults conda
+	
+	conda create -y --name "dmodel" python==3.11
 
 If required, you can upgrade conda using:
 
 	conda install conda
 
-Next we are going to activate the virtual environment and install the required libraries:
+Next we are going to activate the virtual environment and install the remaining libraries:
 
 	conda activate dmodel
 	
-	conda install numpy pytorch torchvision torchaudio cudatoolkit=11.8 tiny-cuda-nn -c pytorch
+	conda install cmake
+	conda install -c conda-forge cuda cudatoolkit=11.8
+	conda install -c pytorch pytorch torchvision torchaudio numpy cupy
 	
-	pip install "setuptools <72.1.0" "opencv-python<4.12.0" "slangtorch==1.3.4" scikit-learn plyfile rich imageio pygltflib usd-core cupy ninja imageio PyOpenGL glfw xatlas gdown imageio imageio-freeimage
+	pip install plyfile rich ninja imageio PyOpenGL glfw xatlas gdown imageio imageio-freeimage
+	
+	conda install -c conda-forge gcc_linux-ppc64le=13
+	export CUDAToolkit_ROOT=$CONDA_PREFIX
+	git clone --recursive https://github.com/NVlabs/tiny-cuda-nn
+	cd $HOME/tiny-cuda-nn
+	mkdir build
+	cd build
+	cmake ..
+	make
 
 Note: If you have difficulty tracking down a specific version of cudatoolkit you can search for the exact version you require using the conda package name:
 
@@ -57,10 +66,10 @@ We can validate NVIDIA CudaToolkit is working from the terminal session by runni
 If CudaToolkit is installed and works you should see a terminal result like:
 
 	nvcc: NVIDIA (R) Cuda compiler driver
-	Copyright (c) 2005-2025 NVIDIA Corporation
-	Built on Tue_May_27_02:21:03_PDT_2025
-	Cuda compilation tools, release 12.9, V12.9.86
-	Build cuda_12.9.r12.9/compiler.36037853_0
+	Copyright (c) 2005-2024 NVIDIA Corporation
+	Built on Thu_Mar_28_02:18:24_PDT_2024
+	Cuda compilation tools, release 12.4, V12.4.131
+	Build cuda_12.4.r12.4/compiler.34097967_0
 
 ## Train a scene
 
@@ -215,13 +224,9 @@ If you don't have CUDA setup in your conda virtual environment you will see the 
 	compilation terminated.
 	ninja: build stopped: subcommand failed.
 
-You can validate if the "cuda_runtime_api.h" file exists on disk using:
+You can validate if the "cuda_runtime_api.h" file exists in the conda folder on disk use:
 
-	ls /usr/local/cuda/include/cuda_runtime_api.h
-
-You can also look in this conda folder:
-
-	ls $CONDA_PREFIX/include/
+	ls $CONDA_PREFIX/include/cuda_runtime_api.h
 
 If you attempt to use the nvdiffrec train.py script with the "--display-interval" CLI flag, you will see the following error message when PyTorch is used without CUDA support:
 
@@ -242,7 +247,17 @@ You can verify the installed copy of PyTorch has CUDA support by running:
 
 If CUDA support is functional the terminal result will look like:
 
-	2.7.1 True
+	2.5.1 True
+
+If CUDA support is not functional the terminal will list false after the version number like:
+
+	2.6.0 False
+
+If torch is not found you will see an error like:
+
+	Traceback (most recent call last):
+		File "<string>", line 1, in <module>
+	ModuleNotFoundError: No module named 'torch'
 
 If this doesn't work, you can check if PyTorch is installed using:
 
@@ -250,7 +265,7 @@ If this doesn't work, you can check if PyTorch is installed using:
 
 If torch is functional the terminal result will look like:
 
-	2.7.1
+	2.5.1
 
 If torch is not found, python will return an error like:
 
