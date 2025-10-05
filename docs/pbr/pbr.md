@@ -134,5 +134,11 @@ Each of the PBR texture passes that were created by Beeble were used as the sour
 
 ## Display Options
 
-Make sure to set the SOPs and Solaris contexts to have the "Display Options -> Geometry -> Particles -> Display particles as" preference to "Pixels". Then set the "Display Options -> Background -> Color Scheme" preference to "Dark". This will make the point sample rendering clearer in the 3D viewport.
+Make sure to set the SOPs and Solaris contexts to have the "Display Options -> Geometry -> Particles -> Display particles as" preference to "Pixels".
+
+![Display Options - Display particles as](Images/display_options_geometry.png)
+
+Then set the "Display Options -> Background -> Color Scheme" preference to "Dark". This will make the point sample rendering clearer in the 3D viewport.
+
+![Display Options - Color Scheme](Images/display_options_background.png)
 
