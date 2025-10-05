@@ -16,7 +16,7 @@
 		- [Agisoft Metashape Pro Python](metashapepro)
 	- PBR Material Creation
 		- [Beeble SwitchLight API](beeble)
-		- [PBR-GS with COPs](pbr/cops)
+		- [PBR-GS with COPs](pbr/pbr)
 	- ComfyUI Automation
 		- [MatAnyone for ComfyUI](comfyui/MatAnyone)
 		- [NormalCrafter for ComfyUI](comfyui/NormalCrafter)

@@ -25,10 +25,11 @@ You can read more about the proposed PBR-GS extension to the gaussian splatting 
 
 Example .hip files are provided to help you get started with PBR-GS workflows in Houdini:
 
-### /HoudiniProjects/COPS_PBR_to_COLMAP
+### /HoudiniProjects/COPS_PBR-GS
 
 - COPS_Beeble_to_COLMAP_Masking_v001.hip
 - COPS_PBR_PreviewMaterial_v001.hip
+- SOPS_PBR-GS_PLY_Attribute_Transfer_v001.hip
 
 ## COPS Beeble to COLMAP Masking
 
@@ -107,3 +108,31 @@ The Beeble generated basecolor and normal texture maps are treated as RGB imager
 The PreviewMaterial node has a geo input connection that allows you to bring in reference geometry. You can also choose from several primitive stand-in mesh procedurals.
 
 The resulting output from the PreviewMaterial node can be passed downstream in the node graph via the geo and material output connections.
+
+# SOPS PBR-GS PLY Attribute Transfer
+
+In this Houdini project, PBS-GS data is formatted for use in Houdini, and for writing to disk as a modified PLY and BGEO output.
+
+This example works with a set of custom PBR texture map trained 3DGS .ply files. The bakesplat nodes flatten down the specular and roughness data streams to Cd point values. Then the attribute transfer nodes are used to align the specular and roughness point samples to the nearest point in the basecolor ply file.
+
+Finally those attributes are copied into a single data stream with the PBR-GS naming convention. BGEO and PLY output is written to disk using file nodes.
+
+![Attr Transfer](Images/SOPS_PBR-GS_PLY_Attribute_Transfer.png)
+
+## How was this data created?
+
+As a pre-processing step before 3DGS training was done: Beeble Switchlight was used to create PBR texture maps for each camera view in a video-grammetry style multi-view camera array.
+
+Houdini COPs was used to take the alpha channel from the delit albedo imagery (called basecolor by Beeble) and apply that alpha mask to the other PBR channels. This avoids the 3DGS trained files from having an unwanted colored "fog" fill the volume when postshot or 3DGRUT trains the models.
+
+Each of the PBR texture passes that were created by Beeble were used as the source imagery when generating per-frame multi-view 3DGS files:
+
+- $HIP/ply/0001/basecolor.ply
+- $HIP/ply/0001/specular.ply
+- $HIP/ply/0001/roughness.ply
+- ...
+
+## Display Options
+
+Make sure to set the SOPs and Solaris contexts to have the "Display Options -> Geometry -> Particles -> Display particles as" preference to "Pixels". Then set the "Display Options -> Background -> Color Scheme" preference to "Dark". This will make the point sample rendering clearer in the 3D viewport.
+
