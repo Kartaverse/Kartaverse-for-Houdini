@@ -60,7 +60,6 @@
 - **Contact**
 	- [Email](mailto:andrew@andrewhazelden.com)
 	- [GitHub](https://github.com/AndrewHazelden)
-	- [LinkedIn](https://www.linkedin.com/in/andrewhazelden/)
 - **Links**
 	- [Medium Blog](https://medium.com/@andrewhazelden)
 	- [Google Group](https://groups.google.com/g/kartaverse/)
