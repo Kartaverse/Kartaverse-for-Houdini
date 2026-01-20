@@ -63,6 +63,4 @@
 	- [LinkedIn](https://www.linkedin.com/in/andrewhazelden/)
 - **Links**
 	- [Medium Blog](https://medium.com/@andrewhazelden)
-	- [Facebook Group](https://www.facebook.com/groups/kartavr)
 	- [Google Group](https://groups.google.com/g/kartaverse/)
-	- [Reddit Group](https://www.reddit.com/r/Kartaverse/)
