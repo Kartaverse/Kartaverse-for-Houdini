@@ -43,6 +43,7 @@
 	- **HQueue**
 		- [KartaLink HQueue Render](hqueue.md)
 - **Related Projects:**
+ 	- [Lightfielder](https://github.com/Lightfielder/)
 	- [Spatial Metadata GUI](https://github.com/Kartaverse/Spatial-Metadata)
 	- [Camera Sensor Database](https://emberlightvfx.github.io/Camera-Sensor-Database/)
 	- [XR LED Panel Database](https://kartaverse.github.io/XR-LED-Panel-Database/)
@@ -51,7 +52,6 @@
 	- [Domemaster3D](https://github.com/zicher3d-org/domemaster-stereo-shader)
 	- [Domemaster Photoshop Actions Pack](https://github.com/Lightfielder/Domemaster-Photoshop-Actions-Pack)
 	- [Panoramic Geometry Collection](https://github.com/AndrewHazelden/Panoramic_Geometry_Collection)
-	- [Lightfielder Suite](https://github.com/Lightfielder/LightfielderSuite)
 	- [Camera Snap Tools](https://github.com/Lightfielder/Maya-CameraSnap-Tools)
 	- [Z360 6DOF Stereo VR Tools](https://github.com/AndrewHazelden/Z360-6DOF-Stereo-VR-Tools)
 	- [dome2rect](https://github.com/AndrewHazelden/dome2rect)
